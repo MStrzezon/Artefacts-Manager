@@ -58,5 +58,9 @@ namespace ArtefactsManager.BusinessLogic.DAO
             return _context.Attributes.Where(c => c.Name == name).FirstOrDefault();
         }
 
+        public IEnumerable<Data.Models.Attribute> GetByArtefactType(int artefactTypeId)
+        {
+            return _context.AttributesArtefactsTypes.Where(c => c.ArtefactTypeId == artefactTypeId).Select(c => c.Attribute).ToList();
+        }
     }
 }

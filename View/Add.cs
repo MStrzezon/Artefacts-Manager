@@ -36,6 +36,19 @@ namespace ArtefactsManager.View
         private void Add_Load(object sender, EventArgs e)
         {
             chooseBox.SelectedIndex = 0;
+            TypeBox.SelectedIndex = 0;
+        }
+
+        private void load_textBoxes()
+        {
+            flowLayoutPanel.Controls.Clear();
+            TextBox[] textBoxes = elementService.loadTextBoxes(TypeBox.Text).ToArray();
+            Label[] labels = elementService.loadLabels(TypeBox.Text).ToArray(); 
+            for (int i = 0; i < labels.Length; i++)
+            {
+                flowLayoutPanel.Controls.Add(labels[i]);
+                flowLayoutPanel.Controls.Add(textBoxes[i]);
+            }
         }
 
         private void chooseBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,7 +66,11 @@ namespace ArtefactsManager.View
 
         private void btnSaveCategory_Click(object sender, EventArgs e)
         {
-            if (categoryService.saveCategory(textBoxCategoryName.Text))
+            if (textBoxCategoryName.Text == "")
+            {
+                MessageBox.Show("Podaj nazwę kategorii.");
+            }
+            else if (categoryService.saveCategory(textBoxCategoryName.Text))
             {
                 this.Close();
             } else
@@ -67,6 +84,16 @@ namespace ArtefactsManager.View
             AddType addType = new AddType();
             addType.ShowDialog();
             loadtypes();
+        }
+
+        private void TypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_textBoxes();
+        }
+
+        private void btnSaveArtefact_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

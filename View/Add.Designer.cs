@@ -32,13 +32,13 @@
             this.textBoxCategoryName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelCategory = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnSaveCategory = new System.Windows.Forms.Button();
             this.panelElement = new System.Windows.Forms.Panel();
             this.AddType = new System.Windows.Forms.Button();
             this.TypeBox = new System.Windows.Forms.ComboBox();
             this.btnSaveArtefact = new System.Windows.Forms.Button();
             this.typeLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCategory.SuspendLayout();
             this.panelElement.SuspendLayout();
             this.SuspendLayout();
@@ -79,29 +79,19 @@
             // 
             this.panelCategory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelCategory.BackColor = System.Drawing.Color.White;
-            this.panelCategory.Controls.Add(this.label2);
             this.panelCategory.Controls.Add(this.btnSaveCategory);
             this.panelCategory.Controls.Add(this.label1);
             this.panelCategory.Controls.Add(this.textBoxCategoryName);
-            this.panelCategory.Location = new System.Drawing.Point(44, 61);
+            this.panelCategory.Location = new System.Drawing.Point(50, 58);
             this.panelCategory.Name = "panelCategory";
-            this.panelCategory.Size = new System.Drawing.Size(292, 360);
+            this.panelCategory.Size = new System.Drawing.Size(292, 167);
             this.panelCategory.TabIndex = 3;
             this.panelCategory.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 107);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Attributes:";
             // 
             // btnSaveCategory
             // 
             this.btnSaveCategory.BackColor = System.Drawing.Color.Turquoise;
-            this.btnSaveCategory.Location = new System.Drawing.Point(47, 301);
+            this.btnSaveCategory.Location = new System.Drawing.Point(99, 103);
             this.btnSaveCategory.Name = "btnSaveCategory";
             this.btnSaveCategory.Size = new System.Drawing.Size(90, 43);
             this.btnSaveCategory.TabIndex = 3;
@@ -113,6 +103,7 @@
             // 
             this.panelElement.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelElement.BackColor = System.Drawing.Color.White;
+            this.panelElement.Controls.Add(this.flowLayoutPanel);
             this.panelElement.Controls.Add(this.AddType);
             this.panelElement.Controls.Add(this.TypeBox);
             this.panelElement.Controls.Add(this.btnSaveArtefact);
@@ -141,6 +132,7 @@
             this.TypeBox.Name = "TypeBox";
             this.TypeBox.Size = new System.Drawing.Size(203, 24);
             this.TypeBox.TabIndex = 4;
+            this.TypeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
             // 
             // btnSaveArtefact
             // 
@@ -151,6 +143,7 @@
             this.btnSaveArtefact.TabIndex = 3;
             this.btnSaveArtefact.Text = "Save";
             this.btnSaveArtefact.UseVisualStyleBackColor = false;
+            this.btnSaveArtefact.Click += new System.EventHandler(this.btnSaveArtefact_Click);
             // 
             // typeLabel
             // 
@@ -160,6 +153,16 @@
             this.typeLabel.Size = new System.Drawing.Size(39, 16);
             this.typeLabel.TabIndex = 2;
             this.typeLabel.Text = "Type";
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(47, 90);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(203, 197);
+            this.flowLayoutPanel.TabIndex = 6;
+            this.flowLayoutPanel.WrapContents = false;
             // 
             // Add
             // 
@@ -189,11 +192,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelCategory;
         private System.Windows.Forms.Button btnSaveCategory;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelElement;
         private System.Windows.Forms.Button btnSaveArtefact;
         private System.Windows.Forms.Button AddType;
         private System.Windows.Forms.ComboBox TypeBox;
         private System.Windows.Forms.Label typeLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }
