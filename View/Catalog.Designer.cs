@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.categoriesBox = new System.Windows.Forms.ComboBox();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.categoriesBox = new System.Windows.Forms.ComboBox();
-            this.searchBox = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -49,6 +49,34 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(677, 64);
             this.panel2.TabIndex = 6;
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchBox.Location = new System.Drawing.Point(441, 36);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(189, 22);
+            this.searchBox.TabIndex = 2;
+            // 
+            // categoriesBox
+            // 
+            this.categoriesBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.categoriesBox.FormattingEnabled = true;
+            this.categoriesBox.Location = new System.Drawing.Point(148, 34);
+            this.categoriesBox.Name = "categoriesBox";
+            this.categoriesBox.Size = new System.Drawing.Size(212, 24);
+            this.categoriesBox.TabIndex = 1;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnAdd.Location = new System.Drawing.Point(11, 13);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(92, 45);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "New";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panel1
             // 
@@ -77,34 +105,6 @@
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(677, 344);
             this.dataGridView.TabIndex = 0;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnAdd.Location = new System.Drawing.Point(11, 13);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(92, 45);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "New";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // categoriesBox
-            // 
-            this.categoriesBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.categoriesBox.FormattingEnabled = true;
-            this.categoriesBox.Location = new System.Drawing.Point(148, 34);
-            this.categoriesBox.Name = "categoriesBox";
-            this.categoriesBox.Size = new System.Drawing.Size(212, 24);
-            this.categoriesBox.TabIndex = 1;
-            // 
-            // searchBox
-            // 
-            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchBox.Location = new System.Drawing.Point(441, 36);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(189, 22);
-            this.searchBox.TabIndex = 2;
             // 
             // Catalog
             // 

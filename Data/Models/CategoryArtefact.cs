@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ArtefactsManager.Data.Models
 {
-    public class CategoryCharacter
+    public class CategoryArtefact
     {
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+        public int ArtefactId { get; set; }
+        public Artefact Artefact { get; set; }
     }
 }

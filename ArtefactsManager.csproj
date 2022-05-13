@@ -158,21 +158,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\DAO\ICategoriesRepository.cs" />
+    <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
+    <Compile Include="BusinessLogic\CatalogService.cs" />
+    <Compile Include="BusinessLogic\CategoryService.cs" />
+    <Compile Include="BusinessLogic\DAO\ArtefactDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\ArtefactTypeDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\AttributeDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\CategoryDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IArtefactDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IArtefactTypeDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IAttributeDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\ICategoryDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IUserDao.cs" />
+    <Compile Include="BusinessLogic\DAO\IRoleDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
+    <Compile Include="BusinessLogic\ElementService.cs" />
     <Compile Include="Data\ArtefactsManagerDatabaseContext.cs" />
+    <Compile Include="Data\Models\Artefact.cs" />
+    <Compile Include="Data\Models\ArtefactAttribute.cs" />
+    <Compile Include="Data\Models\ArtefactType.cs" />
+    <Compile Include="Data\Models\Attribute.cs" />
+    <Compile Include="Data\Models\AttributeArtefactType.cs" />
     <Compile Include="Data\Models\Category.cs" />
-    <Compile Include="Data\Models\CategoryCharacter.cs" />
-    <Compile Include="Data\Models\Cave.cs" />
-    <Compile Include="Data\Models\Character.cs" />
-    <Compile Include="Data\Models\Dragon.cs" />
-    <Compile Include="Data\Models\Ent.cs" />
-    <Compile Include="Data\Models\Grove.cs" />
-    <Compile Include="Data\Models\Mage.cs" />
-    <Compile Include="Data\Models\Quarter.cs" />
+    <Compile Include="Data\Models\CategoryArtefact.cs" />
+    <Compile Include="Migrations\20220513085641_newDatabase.cs" />
+    <Compile Include="Migrations\20220513085641_newDatabase.designer.cs">
+      <DependentUpon>20220513085641_newDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Models\Role.cs" />
-    <Compile Include="Data\Models\Species.cs" />
-    <Compile Include="Data\Models\Tower.cs" />
     <Compile Include="Data\Models\User.cs" />
     <Compile Include="Data\Models\UserRole.cs" />
     <Compile Include="Migrations\20220510103107_CREATEDB.cs" />
@@ -186,6 +200,14 @@
     <Compile Include="Migrations\20220511193045_addCharacters.cs" />
     <Compile Include="Migrations\20220511193045_addCharacters.designer.cs">
       <DependentUpon>20220511193045_addCharacters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220513090805_DATABASEv2.cs" />
+    <Compile Include="Migrations\20220513090805_DATABASEv2.designer.cs">
+      <DependentUpon>20220513090805_DATABASEv2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220513101117_NORMALIZEMODELS.cs" />
+    <Compile Include="Migrations\20220513101117_NORMALIZEMODELS.designer.cs">
+      <DependentUpon>20220513101117_NORMALIZEMODELS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Credentials.cs" />
@@ -202,6 +224,12 @@
     </Compile>
     <Compile Include="View\Add.Designer.cs">
       <DependentUpon>Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddType.Designer.cs">
+      <DependentUpon>AddType.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Catalog.cs">
       <SubType>Form</SubType>
@@ -240,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Add.resx">
       <DependentUpon>Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddType.resx">
+      <DependentUpon>AddType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -33,25 +32,17 @@ namespace ArtefactsManager.Data
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<CategoryCharacter> CategoryCharacter { get; set; }
+        public DbSet<Artefact> Artefacts { get; set; }
 
-        public DbSet<Cave> Caves { get; set; }
+        public DbSet<ArtefactAttribute> ArtefactsAttributes { get; set; }
 
-        public DbSet<Character> Characters { get; set; }
+        public DbSet<ArtefactType> ArtefactsTypes { get; set; }
 
-        public DbSet<Dragon> Dragons { get; set; }
+        public DbSet<ArtefactsManager.Data.Models.Attribute> Attributes { get; set; }
 
-        public DbSet<Ent> Ents { get; set; }
+        public DbSet<AttributeArtefactType> AttributesArtefactsTypes { get; set; }
 
-        public DbSet<Grove> Groves { get; set; }
-
-        public DbSet<Mage> Mages { get; set; }
-
-        public DbSet<Quarter> Quarters { get; set; }
-
-        public DbSet<Species> Species { get; set; }
-
-        public DbSet<Tower> Towers { get; set; }
+        public DbSet<CategoryArtefact> CategoriesArtefacts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -66,7 +57,11 @@ namespace ArtefactsManager.Data
         {
             modelBuilder.Entity<UserRole>().HasKey(userRole => new { userRole.UserId, userRole.RoleId });
 
-            modelBuilder.Entity<CategoryCharacter>().HasKey(categoryCharacter => new { categoryCharacter.CharacterId, categoryCharacter.CategoryId });
+            modelBuilder.Entity<ArtefactAttribute>().HasKey(artefactAttribute => new { artefactAttribute.ArtefactId, artefactAttribute.AttributeId });
+
+            modelBuilder.Entity<AttributeArtefactType>().HasKey(aat => new { aat.AttributeId, aat.ArtefactTypeId });
+
+            modelBuilder.Entity<CategoryArtefact>().HasKey(ca => new { ca.CategoryId, ca.ArtefactId });
         }
 
     }

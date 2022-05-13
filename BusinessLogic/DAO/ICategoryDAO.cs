@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace ArtefactsManager.BusinessLogic.DAO
 {
-    public interface ICateogoriesRepository
+    public interface ICategoryDAO
     {
         IEnumerable<Category> GetAll();
-        Category GetById(int EmployeeID);
-        void Insert(Category employee);
-        void Update(Category employee);
-        void Delete(int EmployeeID);
+        Category GetById(int categoryId);
+        void Insert(Category category);
+        void Update(Category category);
+        void Delete(int categoryId);
         void Save();
+
+        Category GetByName(string name);
     }
 }

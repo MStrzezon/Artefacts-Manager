@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace ArtefactsManager.Data.Models
 {
-    public class Category
+    public class Artefact
     {
-        public int CategoryId { get; set; }
+        public int ArtefactId { get; set; }
 
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
+
+        public ArtefactType ArtefactType { get; set; }
+
+        public ICollection<ArtefactAttribute> ArtefactAttributes { get; set; }
 
         public ICollection<CategoryArtefact> CategoryArtefacts { get; set; }
+
     }
 }

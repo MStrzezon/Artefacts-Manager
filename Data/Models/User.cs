@@ -8,10 +8,6 @@ namespace ArtefactsManager.Data.Models
 {
     public class User
     {
-        public User()
-        {
-            this.Roles = new List<UserRole>();
-        }
         public int UserId { get; set; }
 
         public string Username { get; set; }

@@ -1,5 +1,6 @@
 ﻿using ArtefactsManager.Data;
 using ArtefactsManager.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,55 @@ using System.Threading.Tasks;
 
 namespace ArtefactsManager.BusinessLogic.DAO
 {
-    internal class UserDAO
+    public class UserDAO : IUserDao
     {
+        private readonly ArtefactsManagerDatabaseContext _context;
+
+        public UserDAO()
+        {
+            _context = new ArtefactsManagerDatabaseContext();
+        }
+
+        public UserDAO(ArtefactsManagerDatabaseContext context)
+        {
+            _context = context;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _context.Users.ToList();
+        }
+
+        public User GetById(int userId)
+        {
+            return _context.Users.Find(userId);
+        }
+
+        public void Insert(User user)
+        {
+            _context.Users.Add(user);
+        }
+
+        public void Update(User user)
+        {
+            _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public void Delete(int userId)
+        {
+            User user = _context.Users.Find(userId);
+            _context.Users.Remove(user);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+
         public User getUser(string username, string password)
         {
-            User userToReturn;
-            using (var ctx = new ArtefactsManagerDatabaseContext())
-            {
-                userToReturn = (from u in ctx.Users where u.Username == username && u.Password == password select u).FirstOrDefault<User>();
-            }
-            return userToReturn;
+            return (from u in _context.Users where u.Username == username && u.Password == password select u).FirstOrDefault<User>();
         }
     }
 }

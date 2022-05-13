@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.chooseBox = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxCategoryName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelCategory = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSaveCategory = new System.Windows.Forms.Button();
             this.panelElement = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.AddType = new System.Windows.Forms.Button();
+            this.TypeBox = new System.Windows.Forms.ComboBox();
+            this.btnSaveArtefact = new System.Windows.Forms.Button();
+            this.typeLabel = new System.Windows.Forms.Label();
             this.panelCategory.SuspendLayout();
             this.panelElement.SuspendLayout();
             this.SuspendLayout();
@@ -58,12 +59,12 @@
             this.chooseBox.TabIndex = 0;
             this.chooseBox.SelectedIndexChanged += new System.EventHandler(this.chooseBox_SelectedIndexChanged);
             // 
-            // textBox1
+            // textBoxCategoryName
             // 
-            this.textBox1.Location = new System.Drawing.Point(47, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(203, 22);
-            this.textBox1.TabIndex = 1;
+            this.textBoxCategoryName.Location = new System.Drawing.Point(47, 54);
+            this.textBoxCategoryName.Name = "textBoxCategoryName";
+            this.textBoxCategoryName.Size = new System.Drawing.Size(203, 22);
+            this.textBoxCategoryName.TabIndex = 1;
             // 
             // label1
             // 
@@ -79,13 +80,14 @@
             this.panelCategory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelCategory.BackColor = System.Drawing.Color.White;
             this.panelCategory.Controls.Add(this.label2);
-            this.panelCategory.Controls.Add(this.btnSave);
+            this.panelCategory.Controls.Add(this.btnSaveCategory);
             this.panelCategory.Controls.Add(this.label1);
-            this.panelCategory.Controls.Add(this.textBox1);
-            this.panelCategory.Location = new System.Drawing.Point(48, 63);
+            this.panelCategory.Controls.Add(this.textBoxCategoryName);
+            this.panelCategory.Location = new System.Drawing.Point(44, 61);
             this.panelCategory.Name = "panelCategory";
-            this.panelCategory.Size = new System.Drawing.Size(295, 360);
+            this.panelCategory.Size = new System.Drawing.Size(292, 360);
             this.panelCategory.TabIndex = 3;
+            this.panelCategory.Visible = false;
             // 
             // label2
             // 
@@ -96,62 +98,76 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Attributes:";
             // 
-            // btnSave
+            // btnSaveCategory
             // 
-            this.btnSave.BackColor = System.Drawing.Color.Turquoise;
-            this.btnSave.Location = new System.Drawing.Point(47, 301);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 43);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSaveCategory.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSaveCategory.Location = new System.Drawing.Point(47, 301);
+            this.btnSaveCategory.Name = "btnSaveCategory";
+            this.btnSaveCategory.Size = new System.Drawing.Size(90, 43);
+            this.btnSaveCategory.TabIndex = 3;
+            this.btnSaveCategory.Text = "Save";
+            this.btnSaveCategory.UseVisualStyleBackColor = false;
+            this.btnSaveCategory.Click += new System.EventHandler(this.btnSaveCategory_Click);
             // 
             // panelElement
             // 
             this.panelElement.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelElement.BackColor = System.Drawing.Color.White;
-            this.panelElement.Controls.Add(this.comboBox1);
-            this.panelElement.Controls.Add(this.button1);
-            this.panelElement.Controls.Add(this.label4);
-            this.panelElement.Location = new System.Drawing.Point(48, 63);
+            this.panelElement.Controls.Add(this.AddType);
+            this.panelElement.Controls.Add(this.TypeBox);
+            this.panelElement.Controls.Add(this.btnSaveArtefact);
+            this.panelElement.Controls.Add(this.typeLabel);
+            this.panelElement.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.panelElement.Location = new System.Drawing.Point(47, 58);
             this.panelElement.Name = "panelElement";
             this.panelElement.Size = new System.Drawing.Size(295, 360);
             this.panelElement.TabIndex = 5;
             // 
-            // button1
+            // AddType
             // 
-            this.button1.BackColor = System.Drawing.Color.Turquoise;
-            this.button1.Location = new System.Drawing.Point(47, 301);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 43);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
+            this.AddType.BackColor = System.Drawing.Color.LightSalmon;
+            this.AddType.Location = new System.Drawing.Point(160, 301);
+            this.AddType.Name = "AddType";
+            this.AddType.Size = new System.Drawing.Size(90, 43);
+            this.AddType.TabIndex = 5;
+            this.AddType.Text = "New type";
+            this.AddType.UseVisualStyleBackColor = false;
+            this.AddType.Click += new System.EventHandler(this.AddType_Click);
             // 
-            // label4
+            // TypeBox
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Category:";
+            this.TypeBox.FormattingEnabled = true;
+            this.TypeBox.Location = new System.Drawing.Point(47, 51);
+            this.TypeBox.Name = "TypeBox";
+            this.TypeBox.Size = new System.Drawing.Size(203, 24);
+            this.TypeBox.TabIndex = 4;
             // 
-            // comboBox1
+            // btnSaveArtefact
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(47, 51);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(203, 24);
-            this.comboBox1.TabIndex = 4;
+            this.btnSaveArtefact.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSaveArtefact.Location = new System.Drawing.Point(47, 301);
+            this.btnSaveArtefact.Name = "btnSaveArtefact";
+            this.btnSaveArtefact.Size = new System.Drawing.Size(90, 43);
+            this.btnSaveArtefact.TabIndex = 3;
+            this.btnSaveArtefact.Text = "Save";
+            this.btnSaveArtefact.UseVisualStyleBackColor = false;
+            // 
+            // typeLabel
+            // 
+            this.typeLabel.AutoSize = true;
+            this.typeLabel.Location = new System.Drawing.Point(44, 26);
+            this.typeLabel.Name = "typeLabel";
+            this.typeLabel.Size = new System.Drawing.Size(39, 16);
+            this.typeLabel.TabIndex = 2;
+            this.typeLabel.Text = "Type";
             // 
             // Add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 460);
-            this.Controls.Add(this.panelElement);
             this.Controls.Add(this.panelCategory);
+            this.Controls.Add(this.panelElement);
             this.Controls.Add(this.chooseBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -169,14 +185,15 @@
         #endregion
 
         private System.Windows.Forms.ComboBox chooseBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxCategoryName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelCategory;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSaveCategory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelElement;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnSaveArtefact;
+        private System.Windows.Forms.Button AddType;
+        private System.Windows.Forms.ComboBox TypeBox;
+        private System.Windows.Forms.Label typeLabel;
     }
 }

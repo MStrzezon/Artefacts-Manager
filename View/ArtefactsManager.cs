@@ -15,6 +15,7 @@ namespace ArtefactsManager.View
     {
         private Form activeForm;
         private Button currentButton;
+
         public ArtefactsManager()
         {
             InitializeComponent();
