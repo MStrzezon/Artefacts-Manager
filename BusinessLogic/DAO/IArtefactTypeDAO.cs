@@ -15,5 +15,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Update(ArtefactType artefactType);
         void Delete(int artefactTypeId);
         void Save();
+
+        ArtefactType GetByName(string name);
     }
 }

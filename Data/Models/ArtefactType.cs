@@ -10,7 +10,7 @@ namespace ArtefactsManager.Data.Models
     {
         public int ArtefactTypeId { get; set; }
 
-        public string ArtefactName { get; set; }
+        public string TypeName { get; set; }
 
         public ICollection<AttributeArtefactType> AttributeArtefactTypes { get; set; }
     }

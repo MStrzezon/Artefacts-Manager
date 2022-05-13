@@ -209,6 +209,10 @@
     <Compile Include="Migrations\20220513101117_NORMALIZEMODELS.designer.cs">
       <DependentUpon>20220513101117_NORMALIZEMODELS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs" />
+    <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.designer.cs">
+      <DependentUpon>20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Credentials.cs" />
     <Compile Include="Utils\Encryption.cs" />

@@ -14,5 +14,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Update(Data.Models.Attribute attribute);
         void Delete(int attributeId);
         void Save();
+
+        Data.Models.Attribute GetByName(string name);
     }
 }

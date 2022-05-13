@@ -53,5 +53,10 @@ namespace ArtefactsManager.BusinessLogic.DAO
             _context.SaveChanges();
         }
 
+        public Data.Models.Attribute GetByName(string name)
+        {
+            return _context.Attributes.Where(c => c.Name == name).FirstOrDefault();
+        }
+
     }
 }

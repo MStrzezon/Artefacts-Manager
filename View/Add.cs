@@ -29,7 +29,7 @@ namespace ArtefactsManager.View
             TypeBox.Items.Clear();
             foreach (ArtefactType artefactType in elementService.getAllArtefactsTypes())
             {
-                TypeBox.Items.Add(artefactType);
+                TypeBox.Items.Add(artefactType.TypeName);
             }
         }
 
