@@ -34,11 +34,17 @@
             this.panelCategory = new System.Windows.Forms.Panel();
             this.btnSaveCategory = new System.Windows.Forms.Button();
             this.panelElement = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.categoryBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.AddType = new System.Windows.Forms.Button();
-            this.TypeBox = new System.Windows.Forms.ComboBox();
+            this.typeBox = new System.Windows.Forms.ComboBox();
             this.btnSaveArtefact = new System.Windows.Forms.Button();
             this.typeLabel = new System.Windows.Forms.Label();
-            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelCategory.SuspendLayout();
             this.panelElement.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +61,7 @@
             this.chooseBox.Location = new System.Drawing.Point(0, 0);
             this.chooseBox.Name = "chooseBox";
             this.chooseBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.chooseBox.Size = new System.Drawing.Size(383, 33);
+            this.chooseBox.Size = new System.Drawing.Size(426, 33);
             this.chooseBox.TabIndex = 0;
             this.chooseBox.SelectedIndexChanged += new System.EventHandler(this.chooseBox_SelectedIndexChanged);
             // 
@@ -82,7 +88,7 @@
             this.panelCategory.Controls.Add(this.btnSaveCategory);
             this.panelCategory.Controls.Add(this.label1);
             this.panelCategory.Controls.Add(this.textBoxCategoryName);
-            this.panelCategory.Location = new System.Drawing.Point(50, 58);
+            this.panelCategory.Location = new System.Drawing.Point(39, 60);
             this.panelCategory.Name = "panelCategory";
             this.panelCategory.Size = new System.Drawing.Size(292, 167);
             this.panelCategory.TabIndex = 3;
@@ -103,21 +109,79 @@
             // 
             this.panelElement.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelElement.BackColor = System.Drawing.Color.White;
+            this.panelElement.Controls.Add(this.panel1);
+            this.panelElement.Controls.Add(this.label4);
+            this.panelElement.Controls.Add(this.nameBox);
+            this.panelElement.Controls.Add(this.label3);
+            this.panelElement.Controls.Add(this.categoryBox);
+            this.panelElement.Controls.Add(this.label2);
             this.panelElement.Controls.Add(this.flowLayoutPanel);
             this.panelElement.Controls.Add(this.AddType);
-            this.panelElement.Controls.Add(this.TypeBox);
+            this.panelElement.Controls.Add(this.typeBox);
             this.panelElement.Controls.Add(this.btnSaveArtefact);
             this.panelElement.Controls.Add(this.typeLabel);
             this.panelElement.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.panelElement.Location = new System.Drawing.Point(47, 58);
+            this.panelElement.Location = new System.Drawing.Point(39, 60);
             this.panelElement.Name = "panelElement";
-            this.panelElement.Size = new System.Drawing.Size(295, 360);
+            this.panelElement.Size = new System.Drawing.Size(347, 434);
             this.panelElement.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(44, 143);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 16);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Attributes:";
+            // 
+            // nameBox
+            // 
+            this.nameBox.Location = new System.Drawing.Point(47, 107);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(247, 22);
+            this.nameBox.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 16);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Name:";
+            // 
+            // categoryBox
+            // 
+            this.categoryBox.FormattingEnabled = true;
+            this.categoryBox.Location = new System.Drawing.Point(47, 319);
+            this.categoryBox.Name = "categoryBox";
+            this.categoryBox.Size = new System.Drawing.Size(247, 24);
+            this.categoryBox.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(44, 292);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 16);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Category:";
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(47, 175);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(247, 112);
+            this.flowLayoutPanel.TabIndex = 6;
+            this.flowLayoutPanel.WrapContents = false;
             // 
             // AddType
             // 
             this.AddType.BackColor = System.Drawing.Color.LightSalmon;
-            this.AddType.Location = new System.Drawing.Point(160, 301);
+            this.AddType.Location = new System.Drawing.Point(204, 374);
             this.AddType.Name = "AddType";
             this.AddType.Size = new System.Drawing.Size(90, 43);
             this.AddType.TabIndex = 5;
@@ -125,19 +189,19 @@
             this.AddType.UseVisualStyleBackColor = false;
             this.AddType.Click += new System.EventHandler(this.AddType_Click);
             // 
-            // TypeBox
+            // typeBox
             // 
-            this.TypeBox.FormattingEnabled = true;
-            this.TypeBox.Location = new System.Drawing.Point(47, 51);
-            this.TypeBox.Name = "TypeBox";
-            this.TypeBox.Size = new System.Drawing.Size(203, 24);
-            this.TypeBox.TabIndex = 4;
-            this.TypeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
+            this.typeBox.FormattingEnabled = true;
+            this.typeBox.Location = new System.Drawing.Point(47, 51);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(247, 24);
+            this.typeBox.TabIndex = 4;
+            this.typeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
             // 
             // btnSaveArtefact
             // 
             this.btnSaveArtefact.BackColor = System.Drawing.Color.Turquoise;
-            this.btnSaveArtefact.Location = new System.Drawing.Point(47, 301);
+            this.btnSaveArtefact.Location = new System.Drawing.Point(47, 374);
             this.btnSaveArtefact.Name = "btnSaveArtefact";
             this.btnSaveArtefact.Size = new System.Drawing.Size(90, 43);
             this.btnSaveArtefact.TabIndex = 3;
@@ -150,25 +214,23 @@
             this.typeLabel.AutoSize = true;
             this.typeLabel.Location = new System.Drawing.Point(44, 26);
             this.typeLabel.Name = "typeLabel";
-            this.typeLabel.Size = new System.Drawing.Size(39, 16);
+            this.typeLabel.Size = new System.Drawing.Size(42, 16);
             this.typeLabel.TabIndex = 2;
-            this.typeLabel.Text = "Type";
+            this.typeLabel.Text = "Type:";
             // 
-            // flowLayoutPanel
+            // panel1
             // 
-            this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(47, 90);
-            this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(203, 197);
-            this.flowLayoutPanel.TabIndex = 6;
-            this.flowLayoutPanel.WrapContents = false;
+            this.panel1.BackColor = System.Drawing.Color.Turquoise;
+            this.panel1.Location = new System.Drawing.Point(48, 159);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(247, 3);
+            this.panel1.TabIndex = 12;
             // 
             // Add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 460);
+            this.ClientSize = new System.Drawing.Size(426, 506);
             this.Controls.Add(this.panelCategory);
             this.Controls.Add(this.panelElement);
             this.Controls.Add(this.chooseBox);
@@ -195,8 +257,14 @@
         private System.Windows.Forms.Panel panelElement;
         private System.Windows.Forms.Button btnSaveArtefact;
         private System.Windows.Forms.Button AddType;
-        private System.Windows.Forms.ComboBox TypeBox;
+        private System.Windows.Forms.ComboBox typeBox;
         private System.Windows.Forms.Label typeLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.ComboBox categoryBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox nameBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
     }
 }

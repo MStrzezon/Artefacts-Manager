@@ -11,7 +11,5 @@ namespace ArtefactsManager.Data.Models
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
-
-        public ICollection<CategoryArtefact> CategoryArtefacts { get; set; }
     }
 }

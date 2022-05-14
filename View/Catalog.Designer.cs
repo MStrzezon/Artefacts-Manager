@@ -29,18 +29,27 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.typeBox = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.categoriesBox = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.typeBox);
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.searchBox);
             this.panel2.Controls.Add(this.categoriesBox);
             this.panel2.Controls.Add(this.btnAdd);
@@ -50,10 +59,52 @@
             this.panel2.Size = new System.Drawing.Size(677, 64);
             this.panel2.TabIndex = 6;
             // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(124, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 16);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Type:";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(124, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Category: ";
+            // 
+            // typeBox
+            // 
+            this.typeBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeBox.FormattingEnabled = true;
+            this.typeBox.Location = new System.Drawing.Point(198, 33);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(212, 24);
+            this.typeBox.TabIndex = 4;
+            this.typeBox.SelectedIndexChanged += new System.EventHandler(this.typeBox_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox1.Image = global::ArtefactsManager.Properties.Resources.search;
+            this.pictureBox1.Location = new System.Drawing.Point(630, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 21);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // searchBox
             // 
             this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchBox.Location = new System.Drawing.Point(441, 36);
+            this.searchBox.Location = new System.Drawing.Point(435, 13);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(189, 22);
             this.searchBox.TabIndex = 2;
@@ -61,11 +112,13 @@
             // categoriesBox
             // 
             this.categoriesBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.categoriesBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoriesBox.FormattingEnabled = true;
-            this.categoriesBox.Location = new System.Drawing.Point(148, 34);
+            this.categoriesBox.Location = new System.Drawing.Point(198, 3);
             this.categoriesBox.Name = "categoriesBox";
             this.categoriesBox.Size = new System.Drawing.Size(212, 24);
             this.categoriesBox.TabIndex = 1;
+            this.categoriesBox.SelectedIndexChanged += new System.EventHandler(this.categoriesBox_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -89,6 +142,8 @@
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -117,6 +172,7 @@
             this.Text = "Catalog";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -130,5 +186,9 @@
         private System.Windows.Forms.ComboBox categoriesBox;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox typeBox;
     }
 }

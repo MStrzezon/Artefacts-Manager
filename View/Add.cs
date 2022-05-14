@@ -16,34 +16,48 @@ namespace ArtefactsManager.View
     {
         private readonly CategoryService categoryService;
         private readonly ElementService elementService;
+        private readonly CatalogService catalogService;
         public Add()
         {
             InitializeComponent();
             categoryService = new CategoryService();
             elementService = new ElementService();
+            catalogService = new CatalogService();
             loadtypes();
+            loadCategories();
+        }
+
+        private void loadCategories()
+        {
+            categoryBox.Items.Clear();
+            categoryBox.Tag = catalogService.getCategories();
+            foreach (Category c in catalogService.getCategories())
+            {
+                categoryBox.Items.Add(c.CategoryName);
+            }
         }
 
         private void loadtypes()
         {
-            TypeBox.Items.Clear();
+            typeBox.Items.Clear();
+            typeBox.Tag = elementService.getAllArtefactsTypes();
             foreach (ArtefactType artefactType in elementService.getAllArtefactsTypes())
             {
-                TypeBox.Items.Add(artefactType.TypeName);
+                typeBox.Items.Add(artefactType.TypeName);
             }
         }
 
         private void Add_Load(object sender, EventArgs e)
         {
             chooseBox.SelectedIndex = 0;
-            TypeBox.SelectedIndex = 0;
+            typeBox.SelectedIndex = 0;
         }
 
         private void load_textBoxes()
         {
             flowLayoutPanel.Controls.Clear();
-            TextBox[] textBoxes = elementService.loadTextBoxes(TypeBox.Text).ToArray();
-            Label[] labels = elementService.loadLabels(TypeBox.Text).ToArray(); 
+            TextBox[] textBoxes = elementService.loadTextBoxes(typeBox.Text).ToArray();
+            Label[] labels = elementService.loadLabels(typeBox.Text).ToArray(); 
             for (int i = 0; i < labels.Length; i++)
             {
                 flowLayoutPanel.Controls.Add(labels[i]);
@@ -57,10 +71,14 @@ namespace ArtefactsManager.View
             {
                 panelCategory.Visible = true;
                 panelElement.Visible = false;
-            } else
+                Size = new Size(380, 328);
+                panelCategory.Location = new Point(44, 51);
+            }
+            else
             {
                 panelCategory.Visible=false;
                 panelElement.Visible=true;
+                Size = new Size(444, 553);
             }
         }
 
@@ -93,7 +111,18 @@ namespace ArtefactsManager.View
 
         private void btnSaveArtefact_Click(object sender, EventArgs e)
         {
-
+            List<ArtefactType> artefactTypes = (List<ArtefactType>)typeBox.Tag;
+            List<Category> categories = (List<Category>)categoryBox.Tag;
+            Dictionary<Data.Models.Attribute, string> attributes = new Dictionary<Data.Models.Attribute, string>();
+            foreach (Control control in flowLayoutPanel.Controls)
+            {
+                if (control is TextBox)
+                {
+                    attributes[(Data.Models.Attribute)control.Tag] = control.Text;
+                }
+            }
+            elementService.saveElement(artefactTypes.ElementAt(typeBox.SelectedIndex), nameBox.Text, attributes, categories.ElementAt(categoryBox.SelectedIndex));
+            this.Close();
         }
     }
 }

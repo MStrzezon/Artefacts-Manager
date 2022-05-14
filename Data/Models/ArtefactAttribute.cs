@@ -13,5 +13,7 @@ namespace ArtefactsManager.Data.Models
 
         public int AttributeId { get; set; }
         public Attribute Attribute { get; set; }
+
+        public string Value { get; set; }
     }
 }

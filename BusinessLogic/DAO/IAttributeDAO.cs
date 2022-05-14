@@ -18,5 +18,6 @@ namespace ArtefactsManager.BusinessLogic.DAO
         Data.Models.Attribute GetByName(string name);
 
         IEnumerable<Data.Models.Attribute> GetByArtefactType(int artefactTypeId);
+
     }
 }

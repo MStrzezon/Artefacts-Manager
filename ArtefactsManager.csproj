@@ -158,13 +158,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\AccountService.cs" />
     <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
     <Compile Include="BusinessLogic\CatalogService.cs" />
     <Compile Include="BusinessLogic\CategoryService.cs" />
+    <Compile Include="BusinessLogic\DAO\ArtefactAttributeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactDAO.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactTypeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\AttributeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\CategoryDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IArtefactAttributeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\IArtefactDAO.cs" />
     <Compile Include="BusinessLogic\DAO\IArtefactTypeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\IAttributeDAO.cs" />
@@ -181,7 +184,6 @@
     <Compile Include="Data\Models\Attribute.cs" />
     <Compile Include="Data\Models\AttributeArtefactType.cs" />
     <Compile Include="Data\Models\Category.cs" />
-    <Compile Include="Data\Models\CategoryArtefact.cs" />
     <Compile Include="Migrations\20220513085641_newDatabase.cs" />
     <Compile Include="Migrations\20220513085641_newDatabase.designer.cs">
       <DependentUpon>20220513085641_newDatabase.cs</DependentUpon>
@@ -212,6 +214,18 @@
     <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs" />
     <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.designer.cs">
       <DependentUpon>20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220514082207_add_column_to_artefact.cs" />
+    <Compile Include="Migrations\20220514082207_add_column_to_artefact.designer.cs">
+      <DependentUpon>20220514082207_add_column_to_artefact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220514085233_add_columnt_to_artefactattribute.cs" />
+    <Compile Include="Migrations\20220514085233_add_columnt_to_artefactattribute.designer.cs">
+      <DependentUpon>20220514085233_add_columnt_to_artefactattribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220514091519_delete_artefact_category.cs" />
+    <Compile Include="Migrations\20220514091519_delete_artefact_category.designer.cs">
+      <DependentUpon>20220514091519_delete_artefact_category.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Credentials.cs" />
@@ -279,6 +293,9 @@
     <EmbeddedResource Include="View\Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Edit.resx">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -320,6 +337,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

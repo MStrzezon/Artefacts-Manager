@@ -3,14 +3,16 @@ using System;
 using ArtefactsManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtefactsManager.Migrations
 {
     [DbContext(typeof(ArtefactsManagerDatabaseContext))]
-    partial class ArtefactsManagerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220514085233_add_columnt_to_artefactattribute")]
+    partial class add_columnt_to_artefactattribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace ArtefactsManager.Migrations
                     b.Property<int?>("ArtefactTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
@@ -38,8 +37,6 @@ namespace ArtefactsManager.Migrations
                     b.HasKey("ArtefactId");
 
                     b.HasIndex("ArtefactTypeId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Artefacts");
                 });
@@ -119,6 +116,21 @@ namespace ArtefactsManager.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ArtefactsManager.Data.Models.CategoryArtefact", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArtefactId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId", "ArtefactId");
+
+                    b.HasIndex("ArtefactId");
+
+                    b.ToTable("CategoriesArtefacts");
+                });
+
             modelBuilder.Entity("ArtefactsManager.Data.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -173,10 +185,6 @@ namespace ArtefactsManager.Migrations
                     b.HasOne("ArtefactsManager.Data.Models.ArtefactType", "ArtefactType")
                         .WithMany()
                         .HasForeignKey("ArtefactTypeId");
-
-                    b.HasOne("ArtefactsManager.Data.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("ArtefactsManager.Data.Models.ArtefactAttribute", b =>
@@ -205,6 +213,21 @@ namespace ArtefactsManager.Migrations
                     b.HasOne("ArtefactsManager.Data.Models.Attribute", "Attribute")
                         .WithMany("AttributeArtefactTypes")
                         .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ArtefactsManager.Data.Models.CategoryArtefact", b =>
+                {
+                    b.HasOne("ArtefactsManager.Data.Models.Artefact", "Artefact")
+                        .WithMany("CategoryArtefacts")
+                        .HasForeignKey("ArtefactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ArtefactsManager.Data.Models.Category", "Category")
+                        .WithMany("CategoryArtefacts")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

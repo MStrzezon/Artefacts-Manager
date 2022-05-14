@@ -12,11 +12,12 @@ namespace ArtefactsManager.Data.Models
 
         public string Name { get; set; }
 
+        public DateTime Created { get; set; }
+
         public ArtefactType ArtefactType { get; set; }
 
+        public Category Category { get; set; }
+
         public ICollection<ArtefactAttribute> ArtefactAttributes { get; set; }
-
-        public ICollection<CategoryArtefact> CategoryArtefacts { get; set; }
-
     }
 }

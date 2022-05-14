@@ -23,14 +23,32 @@ namespace ArtefactsManager.View
             loadCategories();
         }
 
+        private void loadTable(int categoryId, int typeId)
+        {
+            dataGridView.Columns.Clear();
+            dataGridView.DataSource = catalog.getDataTable(categoryId, typeId);
+        }
+
         private void loadCategories()
         {
             categoriesBox.Items.Clear();
+            categoriesBox.Tag = catalog.getCategories();
             foreach(Category c in catalog.getCategories())
             {
                 categoriesBox.Items.Add(c.CategoryName);
             }
         }
+
+        private void loadTypes()
+        {
+            typeBox.Items.Clear();
+            typeBox.Tag = catalog.getTypesByCategory(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId);
+            foreach (ArtefactType type in catalog.getTypesByCategory(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId))
+            {
+                typeBox.Items.Add(type.TypeName);
+            }
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -39,6 +57,37 @@ namespace ArtefactsManager.View
             loadCategories();
         }
 
+        private void categoriesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = null;
+            loadTypes();
+        }
 
+        private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadTable(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+            catalog.createButtonColumns(dataGridView);
+            dataGridView.CellContentClick += dgv_CellContentClick;
+        }
+
+
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                if (e.ColumnIndex == dataGridView.Columns.Count-2)
+                {
+
+                }
+                else if (e.ColumnIndex == dataGridView.Columns.Count-1)
+                {
+                    if (MessageBox.Show("Are you want to delete student record?", "Information", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        catalog.deleteArtefact(e.RowIndex);
+                        dataGridView.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
+        }
     }
 }

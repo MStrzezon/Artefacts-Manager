@@ -22,10 +22,15 @@ namespace ArtefactsManager.View
 
         private void btnAddAttribute_Click(object sender, EventArgs e)
         {
-            if (AttributeBox.Text != "")
+            if (AttributeBox.Text != "" )
             {
-                attributesList.Items.Add(AttributeBox.Text);
-                AttributeBox.Clear();
+                if (ListBox.NoMatches == attributesList.FindStringExact(AttributeBox.Text)) {
+                    attributesList.Items.Add(AttributeBox.Text);
+                    AttributeBox.Clear();
+                } else
+                {
+                    MessageBox.Show("The attribute with that name has already been added.");
+                }
 
             }
 

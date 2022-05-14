@@ -15,5 +15,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Update(Artefact artefact);
         void Delete(int artefactId);
         void Save();
+
+        IEnumerable<Artefact> GetByCategoryAndType(int categoryId, int typeId);
     }
 }

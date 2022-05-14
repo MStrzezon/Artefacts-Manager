@@ -13,11 +13,13 @@ namespace ArtefactsManager.BusinessLogic
     {
         private readonly IArtefactTypeDAO artefactTypeDAO;
         private readonly IAttributeDAO attributeDAO;
+        private readonly IArtefactDAO artefactDAO;
 
         public ElementService()
         {
             artefactTypeDAO = new ArtefactTypeDAO();
             attributeDAO = new AttributeDAO();
+            artefactDAO = new ArtefactDAO();
         }
 
         public IEnumerable<ArtefactType> getAllArtefactsTypes()
@@ -63,6 +65,24 @@ namespace ArtefactsManager.BusinessLogic
                 start += 30;
             }
             return labels;
+        }
+
+        public bool saveElement(ArtefactType type, string name, Dictionary<Data.Models.Attribute, string> attributes, Category category)
+        {
+            Artefact artefact = new Artefact();
+            artefact.Name = name;
+            artefact.Created = DateTime.Now;
+            artefactDAO.Insert(artefact);
+            artefact.ArtefactType = type;
+            artefact.Category = category;
+            List<ArtefactAttribute> attributesList = new List<ArtefactAttribute>();
+            foreach (KeyValuePair<Data.Models.Attribute, string> entry in attributes)
+            {
+                attributesList.Add(new ArtefactAttribute { Attribute = entry.Key, Value = entry.Value });
+            }
+            artefact.ArtefactAttributes = attributesList;
+            artefactDAO.Save(); 
+            return true;
         }
     }
 }

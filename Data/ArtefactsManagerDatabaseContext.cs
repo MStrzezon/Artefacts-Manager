@@ -42,7 +42,6 @@ namespace ArtefactsManager.Data
 
         public DbSet<AttributeArtefactType> AttributesArtefactsTypes { get; set; }
 
-        public DbSet<CategoryArtefact> CategoriesArtefacts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -61,7 +60,6 @@ namespace ArtefactsManager.Data
 
             modelBuilder.Entity<AttributeArtefactType>().HasKey(aat => new { aat.AttributeId, aat.ArtefactTypeId });
 
-            modelBuilder.Entity<CategoryArtefact>().HasKey(ca => new { ca.CategoryId, ca.ArtefactId });
         }
 
     }
