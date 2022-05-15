@@ -38,54 +38,72 @@ namespace ArtefactsManager.BusinessLogic
             return artefactTypeDAO.GetByCategory(categoryId);
         }
 
+        public IEnumerable<Category> getCategoriesByArtefactName(string artefactName)
+        {
+            return categoryDAO.GetByArtefactName(artefactName);
+        }
+
+        public IEnumerable<ArtefactType> getTypesByCategoryAndArtefactName(int categoryId, string artefactName)
+        {
+            return artefactTypeDAO.GetByCategoryAndArtefactName(categoryId, artefactName);
+        }
+
         public DataTable getDataTable(int categoryId, int typeId)
         {
             List<Artefact> showingArtefacts = artefactDAO.GetByCategoryAndType(categoryId, typeId).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
             DataTable dataTable = new DataTable();
-            List<int> attributesId = new List<int>();
-            var attributes = attributeDAO.GetByArtefactType(typeId);
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, showingArtefacts);
+            return dataTable;
+        }
+
+        private void loadColumns(DataTable dataTable, IEnumerable<Data.Models.Attribute> attributes)
+        {
             dataTable.Columns.Add("Id").ReadOnly = true;
             dataTable.Columns.Add("Name").ReadOnly = true;
             foreach (Data.Models.Attribute attribute in attributes)
             {
                 dataTable.Columns.Add(attribute.Name).ReadOnly = true;
-                attributesId.Add(attribute.AttributeId);
             }
             dataTable.Columns.Add("Created date").ReadOnly = true;
+        }
+
+        private void loadRows(DataTable dataTable, IEnumerable<Artefact> artefacts)
+        {
             DataRow tmp;
-            foreach (Artefact artefact in showingArtefacts)
+            string columnName;
+            foreach (Artefact artefact in artefacts)
             {
                 tmp = dataTable.NewRow();
                 tmp["Id"] = artefact.ArtefactId;
                 tmp["Name"] = artefact.Name;
-                for (int i = 0; i < attributesId.Count; i++)
+                for (int i = 0; i < dataTable.Columns.Count - 3; i++)
                 {
-                    tmp[attributeDAO.GetByArtefactType(typeId).ElementAt(i).Name] = artefactAttributeDAO.GetById(artefact.ArtefactId, attributesId[i]).Value;
+                    columnName = dataTable.Columns[i + 2].ColumnName;
+                    tmp[columnName] = artefactAttributeDAO.GetById(artefact.ArtefactId, attributeDAO.GetByName(columnName).AttributeId).Value;
                 }
                 tmp["Created date"] = artefact.Created;
                 dataTable.Rows.Add(tmp);
             }
-            return dataTable;
         }
-
-        public void createButtonColumns(DataGridView dataGridView)
-        {
-            DataGridViewButtonColumn editBtn = new DataGridViewButtonColumn();
-            DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn();
-            editBtn.Text = "Edit";
-            editBtn.UseColumnTextForButtonValue = true;
-            deleteBtn.Text = "Delete";
-            deleteBtn.UseColumnTextForButtonValue = true;
-            dataGridView.Columns.Add(editBtn);
-            dataGridView.Columns.Add(deleteBtn);
-        }
-
-
 
         public void deleteArtefact(int artefactId)
         {
             artefactDAO.Delete(artefactId);
             artefactDAO.Save();
+        }
+
+        public DataTable getDataTableByName(int categoryId, int typeId, string name)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByCategoryAndTypeAndName(categoryId, typeId, name).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, showingArtefacts);
+            return dataTable;
         }
 
     }

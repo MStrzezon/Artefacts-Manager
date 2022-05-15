@@ -19,5 +19,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         IEnumerable<Artefact> GetByCategoryAndType(int categoryId, int typeId);
 
         Artefact GetByIdWithAll(int artefactId);
+
+        IEnumerable<Artefact> GetByCategoryAndTypeAndName(int categoryId, int typeId, string name);
     }
 }

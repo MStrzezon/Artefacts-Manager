@@ -94,7 +94,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox1.Image = global::ArtefactsManager.Properties.Resources.search;
-            this.pictureBox1.Location = new System.Drawing.Point(630, 14);
+            this.pictureBox1.Location = new System.Drawing.Point(639, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(26, 21);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -104,10 +104,11 @@
             // searchBox
             // 
             this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchBox.Location = new System.Drawing.Point(435, 13);
+            this.searchBox.Location = new System.Drawing.Point(444, 24);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(189, 22);
             this.searchBox.TabIndex = 2;
+            this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
             // 
             // categoriesBox
             // 
@@ -146,7 +147,7 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
