@@ -33,21 +33,36 @@ namespace ArtefactsManager.View
             {
                 categoriesBox.Items.Add(c.CategoryName);
             }
+            categoriesBox.Items.Add("All categories");
         }
 
         private void categoriesBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(searchBox.Text))
             {
-                loadTypes();
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTypes();
+                }
+                else
+                {
+                    loadTypesByCategory();
+                }
             }
             else
             {
-                loadTypesByName(searchBox.Text);
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTypesByName(searchBox.Text);
+                }
+                else
+                {
+                    loadTypesByNameAndCategory(searchBox.Text);
+                }
             }
         }
 
-        private void loadTypes()
+        private void loadTypesByCategory()
         {
             typeBox.Items.Clear();
             typeBox.Tag = catalogService.getTypesByCategory(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId);
@@ -56,14 +71,59 @@ namespace ArtefactsManager.View
                 typeBox.Items.Add(type.TypeName);
             }
         }
+
+        private void loadTypes()
+        {
+            typeBox.Items.Clear();
+            typeBox.Tag = catalogService.getTypes();
+            foreach (ArtefactType type in catalogService.getTypes())
+            {
+                typeBox.Items.Add(type.TypeName);
+            }
+        }
+
+
+        private void loadTypesByName(string name)
+        {
+            typeBox.Items.Clear();
+            typeBox.Tag = catalogService.getTypesByArtefactName(name);
+            foreach (ArtefactType type in catalogService.getTypesByArtefactName(name))
+            {
+                typeBox.Items.Add(type.TypeName);
+            }
+        }
+
+        private void loadTypesByNameAndCategory(string name)
+        {
+            typeBox.Items.Clear();
+            typeBox.Tag = catalogService.getTypesByCategoryAndArtefactName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, name);
+            foreach (ArtefactType type in catalogService.getTypesByCategoryAndArtefactName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, name))
+            {
+                typeBox.Items.Add(type.TypeName);
+            }
+        }
         private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(searchBox.Text))
             {
-                loadTable(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTableByType(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                }
+                else
+                {
+                    loadTable(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                }
             } else
             {
-                loadTableByName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTableByTypeAndName(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
+                }
+                else
+                {
+                    loadTableByName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
+                }
             }
             createButtonColumns();
         }
@@ -151,16 +211,7 @@ namespace ArtefactsManager.View
             {
                 categoriesBox.Items.Add(category.CategoryName);
             }
-        }
-
-        private void loadTypesByName(string name)
-        {
-            typeBox.Items.Clear();
-            typeBox.Tag = catalogService.getTypesByCategoryAndArtefactName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, name);
-            foreach (ArtefactType type in catalogService.getTypesByCategoryAndArtefactName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, name))
-            {
-                typeBox.Items.Add(type.TypeName);
-            }
+            categoriesBox.Items.Add("All categories");
         }
 
         private void loadTableByName(int categoryId, int typeId, string name)
@@ -168,6 +219,22 @@ namespace ArtefactsManager.View
             dataGridView.Columns.Clear();
             dataGridView.Refresh();
             dataGridView.DataSource = catalogService.getDataTableByName(categoryId, typeId, name);
+            dataGridView.Columns[0].Visible = false;
+        }
+
+        private void loadTableByType(int typeId)
+        {
+            dataGridView.Columns.Clear();
+            dataGridView.Refresh();
+            dataGridView.DataSource = catalogService.getDataTableByType(typeId);
+            dataGridView.Columns[0].Visible = false;
+        }
+
+        private void loadTableByTypeAndName(int typeId, string name)
+        {
+            dataGridView.Columns.Clear();
+            dataGridView.Refresh();
+            dataGridView.DataSource = catalogService.getDataTableByTypeAndName(typeId, name);
             dataGridView.Columns[0].Visible = false;
         }
     }

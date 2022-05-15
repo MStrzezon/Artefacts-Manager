@@ -86,7 +86,7 @@
             this.typeBox.FormattingEnabled = true;
             this.typeBox.Location = new System.Drawing.Point(198, 33);
             this.typeBox.Name = "typeBox";
-            this.typeBox.Size = new System.Drawing.Size(212, 24);
+            this.typeBox.Size = new System.Drawing.Size(193, 24);
             this.typeBox.TabIndex = 4;
             this.typeBox.SelectedIndexChanged += new System.EventHandler(this.typeBox_SelectedIndexChanged);
             // 
@@ -117,7 +117,7 @@
             this.categoriesBox.FormattingEnabled = true;
             this.categoriesBox.Location = new System.Drawing.Point(198, 3);
             this.categoriesBox.Name = "categoriesBox";
-            this.categoriesBox.Size = new System.Drawing.Size(212, 24);
+            this.categoriesBox.Size = new System.Drawing.Size(193, 24);
             this.categoriesBox.TabIndex = 1;
             this.categoriesBox.SelectedIndexChanged += new System.EventHandler(this.categoriesBox_SelectedIndexChanged);
             // 

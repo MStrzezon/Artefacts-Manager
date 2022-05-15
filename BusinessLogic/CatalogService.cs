@@ -33,6 +33,11 @@ namespace ArtefactsManager.BusinessLogic
             return categoryDAO.GetAll();
         }
 
+        public IEnumerable<ArtefactType> getTypes()
+        {
+            return artefactTypeDAO.GetAll();
+        }
+
         public IEnumerable<ArtefactType> getTypesByCategory(int categoryId)
         {
             return artefactTypeDAO.GetByCategory(categoryId);
@@ -46,6 +51,11 @@ namespace ArtefactsManager.BusinessLogic
         public IEnumerable<ArtefactType> getTypesByCategoryAndArtefactName(int categoryId, string artefactName)
         {
             return artefactTypeDAO.GetByCategoryAndArtefactName(categoryId, artefactName);
+        }
+
+        public IEnumerable<ArtefactType> getTypesByArtefactName(string artefactName)
+        {
+            return artefactTypeDAO.GetByArtefactName(artefactName);
         }
 
         public DataTable getDataTable(int categoryId, int typeId)
@@ -62,6 +72,7 @@ namespace ArtefactsManager.BusinessLogic
         private void loadColumns(DataTable dataTable, IEnumerable<Data.Models.Attribute> attributes)
         {
             dataTable.Columns.Add("Id").ReadOnly = true;
+            dataTable.Columns.Add("Category").ReadOnly = true;
             dataTable.Columns.Add("Name").ReadOnly = true;
             foreach (Data.Models.Attribute attribute in attributes)
             {
@@ -78,10 +89,11 @@ namespace ArtefactsManager.BusinessLogic
             {
                 tmp = dataTable.NewRow();
                 tmp["Id"] = artefact.ArtefactId;
+                tmp["Category"] = artefact.Category.CategoryName;
                 tmp["Name"] = artefact.Name;
-                for (int i = 0; i < dataTable.Columns.Count - 3; i++)
+                for (int i = 0; i < dataTable.Columns.Count - 4; i++)
                 {
-                    columnName = dataTable.Columns[i + 2].ColumnName;
+                    columnName = dataTable.Columns[i + 3].ColumnName;
                     tmp[columnName] = artefactAttributeDAO.GetById(artefact.ArtefactId, attributeDAO.GetByName(columnName).AttributeId).Value;
                 }
                 tmp["Created date"] = artefact.Created;
@@ -106,5 +118,26 @@ namespace ArtefactsManager.BusinessLogic
             return dataTable;
         }
 
+        public DataTable getDataTableByType(int typeId)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByType(typeId).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, showingArtefacts);
+            return dataTable;
+        }
+
+        public DataTable getDataTableByTypeAndName(int typeId, string name)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByTypeAndName(typeId, name).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, showingArtefacts);
+            return dataTable;
+        }
     }
 }

@@ -70,5 +70,13 @@ namespace ArtefactsManager.BusinessLogic.DAO
             var artefactsByCategoryAndName = _context.Artefacts.Where(a => a.Category.CategoryId == categoryId).Where(a => a.Name.StartsWith(artefactName)).Include("ArtefactType").ToList();
             return artefactsByCategoryAndName.Select(c => c.ArtefactType).Distinct().ToList();
         }
+
+        public IEnumerable<ArtefactType> GetByArtefactName(string name)
+        {
+            var artefactsByName = _context.Artefacts.Where(a => a.Name.StartsWith(name)).Include("ArtefactType").ToList();
+            return artefactsByName.Select(c => c.ArtefactType).Distinct().ToList();
+        }
+
+
     }
 }

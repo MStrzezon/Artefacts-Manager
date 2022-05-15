@@ -70,5 +70,18 @@ namespace ArtefactsManager.BusinessLogic.DAO
             return _context.Artefacts.Where(a => a.Category.CategoryId == categoryId && a.ArtefactType.ArtefactTypeId == typeId).Where(a => a.Name.StartsWith(name)).Include("Category").Include("ArtefactType")
                 .Include("ArtefactAttributes").ToList();
         }
+
+        public IEnumerable<Artefact> GetByType(int typeId)
+        {
+            return _context.Artefacts.Where(a => a.ArtefactType.ArtefactTypeId == typeId).Include("Category").Include("ArtefactType")
+                .Include("ArtefactAttributes").ToList();
+        }
+
+        public IEnumerable<Artefact> GetByTypeAndName(int typeId, string name)
+        {
+            return _context.Artefacts.Where(a => a.ArtefactType.ArtefactTypeId == typeId).Where(a => a.Name.StartsWith(name)).Include("Category").Include("ArtefactType")
+    .Include("ArtefactAttributes").ToList();
+        }
+
     }
 }

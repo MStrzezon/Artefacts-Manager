@@ -184,7 +184,7 @@
     <Compile Include="Data\Models\Attribute.cs" />
     <Compile Include="Data\Models\AttributeArtefactType.cs" />
     <Compile Include="Data\Models\Category.cs" />
-    <Compile Include="EditService.cs" />
+    <Compile Include="BusinessLogic\EditService.cs" />
     <Compile Include="Migrations\20220513085641_newDatabase.cs" />
     <Compile Include="Migrations\20220513085641_newDatabase.designer.cs">
       <DependentUpon>20220513085641_newDatabase.cs</DependentUpon>
