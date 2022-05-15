@@ -18,7 +18,6 @@ namespace ArtefactsManager.BusinessLogic
         private readonly IArtefactTypeDAO artefactTypeDAO;
         private readonly IAttributeDAO attributeDAO;
         private readonly IArtefactAttributeDAO artefactAttributeDAO;
-        private static List<Artefact> showingArtefacts;
 
         public CatalogService()
         {
@@ -27,7 +26,6 @@ namespace ArtefactsManager.BusinessLogic
             artefactTypeDAO = new ArtefactTypeDAO();
             attributeDAO = new AttributeDAO();
             artefactAttributeDAO = new ArtefactAttributeDAO();
-            showingArtefacts = new List<Artefact>();
         }
 
         public IEnumerable<Category> getCategories()
@@ -42,10 +40,11 @@ namespace ArtefactsManager.BusinessLogic
 
         public DataTable getDataTable(int categoryId, int typeId)
         {
-            showingArtefacts = artefactDAO.GetByCategoryAndType(categoryId, typeId).ToList();
+            List<Artefact> showingArtefacts = artefactDAO.GetByCategoryAndType(categoryId, typeId).ToList();
             DataTable dataTable = new DataTable();
             List<int> attributesId = new List<int>();
             var attributes = attributeDAO.GetByArtefactType(typeId);
+            dataTable.Columns.Add("Id").ReadOnly = true;
             dataTable.Columns.Add("Name").ReadOnly = true;
             foreach (Data.Models.Attribute attribute in attributes)
             {
@@ -57,6 +56,7 @@ namespace ArtefactsManager.BusinessLogic
             foreach (Artefact artefact in showingArtefacts)
             {
                 tmp = dataTable.NewRow();
+                tmp["Id"] = artefact.ArtefactId;
                 tmp["Name"] = artefact.Name;
                 for (int i = 0; i < attributesId.Count; i++)
                 {
@@ -82,10 +82,9 @@ namespace ArtefactsManager.BusinessLogic
 
 
 
-        public void deleteArtefact(int rowId)
+        public void deleteArtefact(int artefactId)
         {
-            artefactDAO.Delete(showingArtefacts.ElementAt(rowId).ArtefactId);
-            showingArtefacts.RemoveAt(rowId);
+            artefactDAO.Delete(artefactId);
             artefactDAO.Save();
         }
 

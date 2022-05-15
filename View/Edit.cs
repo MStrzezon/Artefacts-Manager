@@ -14,50 +14,111 @@ namespace ArtefactsManager.View
 {
     public partial class Edit : Form
     {
-        private readonly CategoryService categoryService;
-        private readonly CatalogService catalogService;
-        private readonly ElementService elementService;
-        public Edit(Artefact artefact)
+        private readonly EditService editService;
+        public Edit(int artefactId)
         {
             InitializeComponent();
-            categoryService = new CategoryService();
-            catalogService = new CatalogService();
-            elementService = new ElementService();
-            loadData(artefact);
+            editService = new EditService(artefactId);
+            loadData();
         }
 
-        private void loadData(Artefact artefact)
+        private void loadData()
         {
-            nameBox.Text = artefact.Name;
-            loadCategories(artefact.Category.CategoryName);
-            load_textBoxes(artefact);
+            nameBox.Text = editService.getAttributeName();
+            loadCategories();
+            loadTextBoxes();
         }
 
-        private void loadCategories(string categoryName)
+        private void loadCategories()
         {
             categoryBox.Items.Clear();
-            categoryBox.Tag = catalogService.getCategories();
-            foreach (Category c in catalogService.getCategories())
+            categoryBox.Tag = editService.getCategories();
+            foreach (Category c in editService.getCategories())
             {
                 categoryBox.Items.Add(c.CategoryName);
-                if (c.CategoryName == categoryName)
-                {
-                    categoryBox.SelectedIndex = categoryBox.Items.Count - 1;
-                }
             }
+            categoryBox.SelectedIndex = editService.getCurrentCategoryIndex();
         }
 
-        private void load_textBoxes(Artefact artefact)
+        private void loadTextBoxes()
         {
             flowLayoutPanel.Controls.Clear();
-            TextBox[] textBoxes = elementService.loadTextBoxes(artefact.ArtefactType.TypeName).ToArray();
-            Label[] labels = elementService.loadLabels(artefact.ArtefactType.TypeName).ToArray();
+            TextBox[] textBoxes = loadTextBoxes(editService.getAttributes().ToList()).ToArray();
+            Label[] labels = loadLabels(editService.getAttributes().ToList()).ToArray();
             for (int i = 0; i < labels.Length; i++)
             {
                 flowLayoutPanel.Controls.Add(labels[i]);
                 flowLayoutPanel.Controls.Add(textBoxes[i]);
-                textBoxes[i].Text = artefact.ArtefactAttributes.ElementAt(i).Value;
             }
+            int j = 0;
+            foreach (string val in editService.getAttributesValues())
+            {
+                textBoxes[j++].Text = val; 
+            }
+        }
+
+        private List<TextBox> loadTextBoxes(List<Data.Models.Attribute> attributes)
+        {
+            List<TextBox> textBoxes = new List<TextBox>();
+            TextBox tmpTextBox;
+            int start = 27;
+            foreach (var att in attributes)
+            {
+                tmpTextBox = new TextBox();
+                tmpTextBox.Tag = att;
+                tmpTextBox.Location = new Point(start, 10);
+                textBoxes.Add(tmpTextBox);
+                start += 30;
+            }
+            return textBoxes;
+        }
+
+        private List<Label> loadLabels(List<Data.Models.Attribute> attributes)
+        {
+            List<Label> labels = new List<Label>();
+            Label tmpLabel;
+            int start = 10;
+            foreach (var att in attributes)
+            {
+                tmpLabel = new Label();
+                tmpLabel.Text = att.Name;
+                tmpLabel.Tag = att;
+                tmpLabel.Location = new Point(start, 10);
+                labels.Add(tmpLabel);
+                start += 30;
+            }
+            return labels;
+        }
+
+        private void btnSaveArtefact_Click(object sender, EventArgs e)
+        {
+            if (editService.validateData(nameBox.Text, getAttributesValues())) {
+                if (editService.UpdateArtefact(nameBox.Text, getAttributesValues(), categoryBox.SelectedIndex))
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error while updating artefact", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            } else
+            {
+                MessageBox.Show("Fields cannot be empty", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private IEnumerable<string> getAttributesValues()
+        {
+            List<string> attributes = new List<string>();
+            foreach (Control control in flowLayoutPanel.Controls)
+            {
+                if (control is TextBox)
+                {
+                    attributes.Add(((TextBox)control).Text);
+                }
+            }
+            return attributes;
         }
     }
 }

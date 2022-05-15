@@ -127,6 +127,7 @@
             this.btnSaveArtefact.TabIndex = 3;
             this.btnSaveArtefact.Text = "Save";
             this.btnSaveArtefact.UseVisualStyleBackColor = false;
+            this.btnSaveArtefact.Click += new System.EventHandler(this.btnSaveArtefact_Click);
             // 
             // Edit
             // 

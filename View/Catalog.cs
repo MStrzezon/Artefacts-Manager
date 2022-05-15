@@ -27,6 +27,7 @@ namespace ArtefactsManager.View
         {
             dataGridView.Columns.Clear();
             dataGridView.DataSource = catalog.getDataTable(categoryId, typeId);
+            dataGridView.Columns[0].Visible = false;
         }
 
         private void loadCategories()
@@ -77,13 +78,14 @@ namespace ArtefactsManager.View
             {
                 if (e.ColumnIndex == dataGridView.Columns.Count-2)
                 {
-
+                    Edit edit = new Edit(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
+                    edit.ShowDialog();
                 }
                 else if (e.ColumnIndex == dataGridView.Columns.Count-1)
                 {
                     if (MessageBox.Show("Are you want to delete student record?", "Information", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        catalog.deleteArtefact(e.RowIndex);
+                        catalog.deleteArtefact(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
                         dataGridView.Rows.RemoveAt(e.RowIndex);
                     }
                 }
