@@ -177,6 +177,7 @@
     <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
     <Compile Include="BusinessLogic\ElementService.cs" />
+    <Compile Include="BusinessLogic\UsersManagementService.cs" />
     <Compile Include="Data\ArtefactsManagerDatabaseContext.cs" />
     <Compile Include="Data\Models\Artefact.cs" />
     <Compile Include="Data\Models\ArtefactAttribute.cs" />
@@ -191,7 +192,6 @@
     </Compile>
     <Compile Include="Data\Models\Role.cs" />
     <Compile Include="Data\Models\User.cs" />
-    <Compile Include="Data\Models\UserRole.cs" />
     <Compile Include="Migrations\20220510103107_CREATEDB.cs" />
     <Compile Include="Migrations\20220510103107_CREATEDB.designer.cs">
       <DependentUpon>20220510103107_CREATEDB.cs</DependentUpon>
@@ -228,6 +228,10 @@
     <Compile Include="Migrations\20220514091519_delete_artefact_category.designer.cs">
       <DependentUpon>20220514091519_delete_artefact_category.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220516093704_change_user_role.cs" />
+    <Compile Include="Migrations\20220516093704_change_user_role.designer.cs">
+      <DependentUpon>20220516093704_change_user_role.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Credentials.cs" />
     <Compile Include="Utils\Encryption.cs" />
@@ -249,6 +253,12 @@
     </Compile>
     <Compile Include="View\AddType.Designer.cs">
       <DependentUpon>AddType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Catalog.cs">
       <SubType>Form</SubType>
@@ -282,6 +292,12 @@
     <Compile Include="View\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UsersManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UsersManagement.Designer.cs">
+      <DependentUpon>UsersManagement.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\AddType.resx">
       <DependentUpon>AddType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>
@@ -315,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UsersManagement.resx">
+      <DependentUpon>UsersManagement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

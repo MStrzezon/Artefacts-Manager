@@ -16,6 +16,6 @@ namespace ArtefactsManager.Data.Models
 
         public bool IsAdmin { get; set; }
 
-        public ICollection<UserRole> Roles { get; set; }
+        public Role Role { get; set; }
     }
 }

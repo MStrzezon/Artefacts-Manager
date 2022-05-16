@@ -14,7 +14,7 @@ namespace ArtefactsManager.View
 {
     public partial class Catalog : Form
     {
-        private readonly CatalogService catalogService;
+        private CatalogService catalogService;
 
         public Catalog()
         {
@@ -22,6 +22,8 @@ namespace ArtefactsManager.View
             dataGridView.CellContentClick += dgv_CellContentClick;
             catalogService = new CatalogService();
             loadCategories();
+            categoriesBox.SelectedIndex = categoriesBox.Items.Count - 1;
+            typeBox.SelectedIndex = 0;
         }
 
         private void loadCategories()
@@ -60,6 +62,166 @@ namespace ArtefactsManager.View
                     loadTypesByNameAndCategory(searchBox.Text);
                 }
             }
+        }
+
+
+        private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchBox.Text))
+            {
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTableByType(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                }
+                else
+                {
+                    loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                }
+            } else
+            {
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTableByTypeAndName(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
+                }
+                else
+                {
+                    loadTableByName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
+                }
+            }
+            createButtonColumns();
+        }
+
+
+        private void refreshTable()
+        {
+            if (categoriesBox.SelectedIndex != -1 && typeBox.SelectedIndex != -1)
+            {
+                loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                createButtonColumns();
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Add addWindow = new Add();
+            addWindow.ShowDialog();
+            refreshTable();
+        }
+
+
+        private void createButtonColumns()
+        {
+            DataGridViewButtonColumn editBtn = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn();
+            editBtn.Text = "Edit";
+            editBtn.UseColumnTextForButtonValue = true;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseColumnTextForButtonValue = true;
+            dataGridView.Columns.Add(editBtn);
+            dataGridView.Columns.Add(deleteBtn);
+        }
+
+
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                if (e.ColumnIndex == dataGridView.Columns.Count-2)
+                {
+                    Edit edit = new Edit(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
+                    edit.ShowDialog();
+                    catalogService = new CatalogService();
+                }
+                else if (e.ColumnIndex == dataGridView.Columns.Count-1)
+                {
+                    if (MessageBox.Show("Are you want to delete student record?", "Information", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        catalogService.deleteArtefact(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
+                        dataGridView.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
+        }
+
+        private void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            string typeName = getTypeName();
+            string categoryName = getCategoryName();
+            if (string.IsNullOrEmpty(searchBox.Text))
+            {
+                dataGridView.DataSource = null;
+                dataGridView.Columns.Clear();
+                dataGridView.Refresh();
+                loadCategories();
+                setCategoryIndex(categoryName);
+                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
+                {
+                    loadTypes();
+                } else
+                {
+                    loadTypesByCategory();
+                }
+                setTypeIndex(typeName);
+            }
+            else
+            {
+                categoriesBox.Items.Clear();
+                typeBox.Items.Clear();
+                dataGridView.DataSource = null;
+                dataGridView.Columns.Clear();
+                loadCategoriesByName(searchBox.Text);
+                loadTypesByName(searchBox.Text);
+                if (categoryName != null)
+                {
+                    setCategoryIndex(categoryName);
+                }
+                if (typeName != null)
+                {
+                    setTypeIndex(typeName);
+                }
+            }
+        }
+
+        private string getCategoryName()
+        {
+            if (categoriesBox.SelectedIndex == -1)
+            {
+                return null;
+            } else
+            {
+                return categoriesBox.Items[categoriesBox.SelectedIndex].ToString();
+            }
+        }
+
+        private string getTypeName()
+        {
+            if (typeBox.SelectedIndex == -1)
+            {
+                return null;
+            } else
+            {
+                return typeBox.Items[typeBox.SelectedIndex].ToString();
+            }
+        }
+
+        private void setCategoryIndex(string categoryName)
+        {
+            categoriesBox.SelectedIndex = categoriesBox.Items.IndexOf(categoryName);
+        }
+
+        private void setTypeIndex(string typeName)
+        {
+            typeBox.SelectedIndex = typeBox.Items.IndexOf((typeName));
+        }
+
+        private void loadCategoriesByName(string name)
+        {
+            categoriesBox.Tag = catalogService.getCategoriesByArtefactName(name).ToList();
+            foreach (Category category in catalogService.getCategoriesByArtefactName(name))
+            {
+                categoriesBox.Items.Add(category.CategoryName);
+            }
+            categoriesBox.Items.Add("All categories");
         }
 
         private void loadTypesByCategory()
@@ -102,116 +264,14 @@ namespace ArtefactsManager.View
                 typeBox.Items.Add(type.TypeName);
             }
         }
-        private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(searchBox.Text))
-            {
-                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
-                {
-                    loadTableByType(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
-                }
-                else
-                {
-                    loadTable(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
-                }
-            } else
-            {
-                if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
-                {
-                    loadTableByTypeAndName(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
-                }
-                else
-                {
-                    loadTableByName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId, searchBox.Text);
-                }
-            }
-            createButtonColumns();
-        }
 
-        private void loadTable(int categoryId, int typeId)
+
+        private void loadTableByCategoryAndName(int categoryId, int typeId)
         {
             dataGridView.Columns.Clear();
             dataGridView.Refresh();
             dataGridView.DataSource = catalogService.getDataTable(categoryId, typeId);
             dataGridView.Columns[0].Visible = false;
-        }
-
-        private void refreshTable()
-        {
-            if (categoriesBox.SelectedIndex != -1 && typeBox.SelectedIndex != -1)
-            {
-                loadTable(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
-                createButtonColumns();
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            Add addWindow = new Add();
-            addWindow.ShowDialog();
-            refreshTable();
-        }
-
-
-        private void createButtonColumns()
-        {
-            DataGridViewButtonColumn editBtn = new DataGridViewButtonColumn();
-            DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn();
-            editBtn.Text = "Edit";
-            editBtn.UseColumnTextForButtonValue = true;
-            deleteBtn.Text = "Delete";
-            deleteBtn.UseColumnTextForButtonValue = true;
-            dataGridView.Columns.Add(editBtn);
-            dataGridView.Columns.Add(deleteBtn);
-        }
-
-
-        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0) 
-            {
-                if (e.ColumnIndex == dataGridView.Columns.Count-2)
-                {
-                    Edit edit = new Edit(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
-                    edit.ShowDialog();
-                }
-                else if (e.ColumnIndex == dataGridView.Columns.Count-1)
-                {
-                    if (MessageBox.Show("Are you want to delete student record?", "Information", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        catalogService.deleteArtefact(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
-                        dataGridView.Rows.RemoveAt(e.RowIndex);
-                    }
-                }
-            }
-        }
-
-        private void searchBox_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(searchBox.Text))
-            {
-                dataGridView.DataSource = null;
-                dataGridView.Columns.Clear();
-                dataGridView.Refresh();
-                loadCategories();
-            } else
-            {
-                categoriesBox.Items.Clear();
-                typeBox.Items.Clear();
-                dataGridView.DataSource = null;
-                dataGridView.Columns.Clear();
-                loadCategoriesByName(searchBox.Text);
-            }
-        }
-
-        private void loadCategoriesByName(string name)
-        {
-            categoriesBox.Tag = catalogService.getCategoriesByArtefactName(name).ToList();
-            foreach (Category category in catalogService.getCategoriesByArtefactName(name))
-            {
-                categoriesBox.Items.Add(category.CategoryName);
-            }
-            categoriesBox.Items.Add("All categories");
         }
 
         private void loadTableByName(int categoryId, int typeId, string name)

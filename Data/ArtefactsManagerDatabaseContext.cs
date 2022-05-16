@@ -28,8 +28,6 @@ namespace ArtefactsManager.Data
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRole { get; set; }
-
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Artefact> Artefacts { get; set; }
@@ -54,8 +52,6 @@ namespace ArtefactsManager.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserRole>().HasKey(userRole => new { userRole.UserId, userRole.RoleId });
-
             modelBuilder.Entity<ArtefactAttribute>().HasKey(artefactAttribute => new { artefactAttribute.ArtefactId, artefactAttribute.AttributeId });
 
             modelBuilder.Entity<AttributeArtefactType>().HasKey(aat => new { aat.AttributeId, aat.ArtefactTypeId });

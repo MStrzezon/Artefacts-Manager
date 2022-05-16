@@ -69,6 +69,7 @@
             this.btnManagement.Text = "Users Management";
             this.btnManagement.UseVisualStyleBackColor = true;
             this.btnManagement.Visible = false;
+            this.btnManagement.Click += new System.EventHandler(this.btnManagement_Click);
             // 
             // btnAccount
             // 

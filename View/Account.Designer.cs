@@ -34,12 +34,12 @@
             this.roleBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPassword = new System.Windows.Forms.Button();
-            this.saveBtn = new System.Windows.Forms.Button();
-            this.cancelBtn = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.passwordBox = new System.Windows.Forms.TextBox();
             this.confirmBox = new System.Windows.Forms.TextBox();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cancelBtn = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,17 +116,45 @@
             this.btnPassword.UseVisualStyleBackColor = false;
             this.btnPassword.Click += new System.EventHandler(this.btnPassword_Click);
             // 
-            // saveBtn
+            // confirmBox
             // 
-            this.saveBtn.BackColor = System.Drawing.Color.Turquoise;
-            this.saveBtn.Location = new System.Drawing.Point(107, 312);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(103, 43);
-            this.saveBtn.TabIndex = 5;
-            this.saveBtn.Text = "Save";
-            this.saveBtn.UseVisualStyleBackColor = false;
-            this.saveBtn.Visible = false;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.confirmBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.confirmBox.Location = new System.Drawing.Point(107, 259);
+            this.confirmBox.Name = "confirmBox";
+            this.confirmBox.PasswordChar = '*';
+            this.confirmBox.Size = new System.Drawing.Size(264, 22);
+            this.confirmBox.TabIndex = 14;
+            this.confirmBox.Visible = false;
+            // 
+            // passwordBox
+            // 
+            this.passwordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.passwordBox.Location = new System.Drawing.Point(107, 213);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.PasswordChar = '*';
+            this.passwordBox.Size = new System.Drawing.Size(264, 22);
+            this.passwordBox.TabIndex = 13;
+            this.passwordBox.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(104, 240);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 16);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Confirm password";
+            this.label4.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(104, 194);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(96, 16);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "New password";
+            this.label3.Visible = false;
             // 
             // cancelBtn
             // 
@@ -140,45 +168,17 @@
             this.cancelBtn.Visible = false;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // label3
+            // saveBtn
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(104, 194);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 16);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "New password";
-            this.label3.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(104, 240);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Confirm password";
-            this.label4.Visible = false;
-            // 
-            // passwordBox
-            // 
-            this.passwordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.passwordBox.Location = new System.Drawing.Point(107, 213);
-            this.passwordBox.Name = "passwordBox";
-            this.passwordBox.PasswordChar = '*';
-            this.passwordBox.Size = new System.Drawing.Size(264, 22);
-            this.passwordBox.TabIndex = 13;
-            this.passwordBox.Visible = false;
-            // 
-            // confirmBox
-            // 
-            this.confirmBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.confirmBox.Location = new System.Drawing.Point(107, 259);
-            this.confirmBox.Name = "confirmBox";
-            this.confirmBox.PasswordChar = '*';
-            this.confirmBox.Size = new System.Drawing.Size(264, 22);
-            this.confirmBox.TabIndex = 14;
-            this.confirmBox.Visible = false;
+            this.saveBtn.BackColor = System.Drawing.Color.Turquoise;
+            this.saveBtn.Location = new System.Drawing.Point(107, 312);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(103, 43);
+            this.saveBtn.TabIndex = 5;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = false;
+            this.saveBtn.Visible = false;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // Account
             // 

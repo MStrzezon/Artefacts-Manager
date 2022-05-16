@@ -98,5 +98,11 @@ namespace ArtefactsManager.View
         {
             Application.Exit();
         }
+
+        private void btnManagement_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+            OpenChildForm(new UsersManagement(), sender);   
+        }
     }
 }

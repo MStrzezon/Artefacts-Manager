@@ -3,14 +3,16 @@ using System;
 using ArtefactsManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtefactsManager.Migrations
 {
     [DbContext(typeof(ArtefactsManagerDatabaseContext))]
-    partial class ArtefactsManagerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220516093704_change_user_role")]
+    partial class change_user_role
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

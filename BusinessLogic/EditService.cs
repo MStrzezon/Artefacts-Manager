@@ -82,8 +82,8 @@ namespace ArtefactsManager
                 {
                     artefact.ArtefactAttributes.ElementAt(idx++).Value = attributeValue;
                 }
-                artefactDAO.Update(artefact);
                 artefact.Category = getCategories().ElementAt(categoryId);
+                artefactDAO.Update(artefact);
                 artefactDAO.Save();
                 return true;
             } catch (Exception ex)
