@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\AccountService.cs" />
+    <Compile Include="BusinessLogic\AddUserService.cs" />
     <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
     <Compile Include="BusinessLogic\CatalogService.cs" />
     <Compile Include="BusinessLogic\CategoryService.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="BusinessLogic\DAO\IRoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
+    <Compile Include="BusinessLogic\EditUserService.cs" />
     <Compile Include="BusinessLogic\ElementService.cs" />
     <Compile Include="BusinessLogic\UsersManagementService.cs" />
     <Compile Include="Data\ArtefactsManagerDatabaseContext.cs" />
@@ -254,11 +256,11 @@
     <Compile Include="View\AddType.Designer.cs">
       <DependentUpon>AddType.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AddUser.cs">
+    <Compile Include="View\AddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AddUser.Designer.cs">
-      <DependentUpon>AddUser.cs</DependentUpon>
+    <Compile Include="View\AddEditUser.Designer.cs">
+      <DependentUpon>AddEditUser.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Catalog.cs">
       <SubType>Form</SubType>
@@ -307,8 +309,8 @@
     <EmbeddedResource Include="View\AddType.resx">
       <DependentUpon>AddType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\AddUser.resx">
-      <DependentUpon>AddUser.cs</DependentUpon>
+    <EmbeddedResource Include="View\AddEditUser.resx">
+      <DependentUpon>AddEditUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>

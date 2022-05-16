@@ -53,5 +53,10 @@ namespace ArtefactsManager.BusinessLogic.DAO
         {
             _context.SaveChanges();
         }
+
+        public Role GetByName(string name)
+        {
+            return _context.Roles.Where(r => r.RoleName == name).FirstOrDefault();
+        }
     }
 }

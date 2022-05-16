@@ -83,6 +83,7 @@
             this.dataGridViewUser.RowTemplate.Height = 24;
             this.dataGridViewUser.Size = new System.Drawing.Size(434, 326);
             this.dataGridViewUser.TabIndex = 2;
+            this.dataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellContentClick);
             // 
             // panel3
             // 

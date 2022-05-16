@@ -1,6 +1,6 @@
 ﻿namespace ArtefactsManager.View
 {
-    partial class AddUser
+    partial class AddEditUser
     {
         /// <summary>
         /// Required designer variable.
@@ -36,9 +36,9 @@
             this.cancelBtn = new System.Windows.Forms.Button();
             this.changePassBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.roleBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +53,9 @@
             this.panel1.Controls.Add(this.cancelBtn);
             this.panel1.Controls.Add(this.changePassBtn);
             this.panel1.Controls.Add(this.saveBtn);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.roleBox);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.usernameBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(32, 32);
             this.panel1.Name = "panel1";
@@ -111,6 +111,7 @@
             this.cancelBtn.TabIndex = 7;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = false;
+            this.cancelBtn.Visible = false;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // changePassBtn
@@ -133,14 +134,15 @@
             this.saveBtn.TabIndex = 4;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // comboBox1
+            // roleBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(22, 104);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(244, 24);
-            this.comboBox1.TabIndex = 3;
+            this.roleBox.FormattingEnabled = true;
+            this.roleBox.Location = new System.Drawing.Point(22, 104);
+            this.roleBox.Name = "roleBox";
+            this.roleBox.Size = new System.Drawing.Size(244, 24);
+            this.roleBox.TabIndex = 3;
             // 
             // label2
             // 
@@ -151,14 +153,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Role:";
             // 
-            // textBox1
+            // usernameBox
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(22, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(244, 22);
-            this.textBox1.TabIndex = 1;
+            this.usernameBox.Enabled = false;
+            this.usernameBox.Location = new System.Drawing.Point(22, 39);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.ReadOnly = true;
+            this.usernameBox.Size = new System.Drawing.Size(244, 22);
+            this.usernameBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -169,13 +171,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
-            // AddUser
+            // AddEditUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(356, 354);
             this.Controls.Add(this.panel1);
-            this.Name = "AddUser";
+            this.Name = "AddEditUser";
             this.Text = "AddUser";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -186,9 +188,9 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox roleBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button changePassBtn;

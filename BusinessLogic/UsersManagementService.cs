@@ -23,7 +23,7 @@ namespace ArtefactsManager.BusinessLogic
             List<User> users = userDAO.GetAll().ToList();
 
             DataTable dataTable = new DataTable();
-
+            dataTable.Columns.Add("Id").ReadOnly = true;
             dataTable.Columns.Add("Username").ReadOnly = true;
             dataTable.Columns.Add("Role").ReadOnly= true;
 
@@ -31,6 +31,7 @@ namespace ArtefactsManager.BusinessLogic
             foreach (User user in users)
             {
                 tmp = dataTable.NewRow();
+                tmp["Id"] = user.UserId;
                 tmp["Username"] = user.Username;
                 if (user.Role != null)
                 {
@@ -43,5 +44,7 @@ namespace ArtefactsManager.BusinessLogic
             }
             return dataTable;
         }
+
+
     }
 }

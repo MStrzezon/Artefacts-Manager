@@ -15,5 +15,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Update(Role role);
         void Delete(int roleId);
         void Save();
+
+        Role GetByName(string name);
     }
 }

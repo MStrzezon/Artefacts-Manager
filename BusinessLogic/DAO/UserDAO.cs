@@ -30,7 +30,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
 
         public User GetById(int userId)
         {
-            return _context.Users.Find(userId);
+            return _context.Users.Include(u => u.Role).FirstOrDefault(u => u.UserId == userId);
         }
 
         public void Insert(User user)

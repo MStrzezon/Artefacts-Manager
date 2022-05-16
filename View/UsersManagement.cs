@@ -13,7 +13,7 @@ namespace ArtefactsManager.View
 {
     public partial class UsersManagement : Form
     {
-        private readonly UsersManagementService usersManagementService;
+        private UsersManagementService usersManagementService;
         public UsersManagement()
         {
             InitializeComponent();
@@ -23,17 +23,42 @@ namespace ArtefactsManager.View
 
         private void loadUserData()
         {
+            usersManagementService = new UsersManagementService();
+            dataGridViewUser.Columns.Clear();
             dataGridViewUser.DataSource = usersManagementService.loadUsers();
             DataGridViewButtonColumn editBtn = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn();
             editBtn.Text = "Edit";
             editBtn.UseColumnTextForButtonValue = true;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseColumnTextForButtonValue = true;
             dataGridViewUser.Columns.Add(editBtn);
+            dataGridViewUser.Columns.Add(deleteBtn);
+            dataGridViewUser.Columns[0].Visible = false;
         }
 
         private void addUserBtn_Click(object sender, EventArgs e)
         {
-            AddUser addUser = new AddUser();
+            AddEditUser addUser = new AddEditUser(false, -1);
             addUser.ShowDialog();
+        }
+
+
+        private void dataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (e.ColumnIndex == 0) // 2,3,0,1
+                {
+                    AddEditUser addEditUser = new AddEditUser(true, Convert.ToInt32(dataGridViewUser.Rows[e.RowIndex].Cells[2].Value));
+                    addEditUser.ShowDialog();
+                    loadUserData();
+                }
+                else if (e.ColumnIndex == 1)
+                {
+
+                }
+            }
         }
     }
 }
