@@ -16,7 +16,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Update(User user);
         void Delete(int userId);
         void Save();
-
         User getUser(string username, string password);
+        IEnumerable<User> getUsersByRole(int roleId);
     }
 }

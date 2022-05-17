@@ -86,7 +86,6 @@ namespace ArtefactsManager.View
                 {
                     AddEditRole addEditRole = new AddEditRole(true, Convert.ToInt32(dataGridViewRole.Rows[e.RowIndex].Cells[0].Value));
                     addEditRole.ShowDialog();
-                    loadUserData();
                 }
                 else if (e.ColumnIndex == 3)
                 {
@@ -95,6 +94,7 @@ namespace ArtefactsManager.View
                         rolesManagementService.deleteRole(Convert.ToInt32(dataGridViewRole.Rows[e.RowIndex].Cells[0].Value));
                     }
                 }
+                loadUserData();
                 loadRolesData();
             }
         }

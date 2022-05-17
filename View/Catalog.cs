@@ -211,7 +211,7 @@ namespace ArtefactsManager.View
 
         private void setTypeIndex(string typeName)
         {
-            typeBox.SelectedIndex = typeBox.Items.IndexOf((typeName));
+           typeBox.SelectedIndex = typeBox.Items.IndexOf((typeName));
         }
 
         private void loadCategoriesByName(string name)

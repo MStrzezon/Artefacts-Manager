@@ -11,10 +11,12 @@ namespace ArtefactsManager.BusinessLogic
     public class RolesManagementService
     {
         private readonly RoleDAO roleDAO;
+        private readonly UserDAO userDAO;
 
         public RolesManagementService()
         {
             roleDAO = new RoleDAO();
+            userDAO = new UserDAO();
         }
 
         public IEnumerable<Role> getAllRoles()
@@ -26,6 +28,11 @@ namespace ArtefactsManager.BusinessLogic
         {
             try
             {
+                foreach (User user in userDAO.getUsersByRole(roleId))
+                {
+                    userDAO.Delete(user.UserId);
+                }
+                userDAO.Save();
                 roleDAO.Delete(roleId);
                 roleDAO.Save();
                 return true;
