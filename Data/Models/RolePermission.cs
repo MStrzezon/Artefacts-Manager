@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ArtefactsManager.Data.Models
 {
-    public class Role
+    public class RolePermission
     {
         public int RoleId { get; set; }
+        public Role Role { get; set; }
 
-        public string RoleName { get; set; }
-
-        public ICollection<RolePermission> rolePermissions { get; set; }
+        public int PermissionId { get; set; }
+        public Permission Permission { get; set; }
     }
 }

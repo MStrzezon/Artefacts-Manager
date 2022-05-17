@@ -18,31 +18,23 @@ namespace ArtefactsManager.BusinessLogic
             userDAO = new UserDAO();
         }
 
-        public DataTable loadUsers()
+        public IEnumerable<User> getAllUsers()
         {
-            List<User> users = userDAO.GetAll().ToList();
+            return userDAO.GetAll();
+        }
 
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("Id").ReadOnly = true;
-            dataTable.Columns.Add("Username").ReadOnly = true;
-            dataTable.Columns.Add("Role").ReadOnly= true;
-
-            DataRow tmp;
-            foreach (User user in users)
+        public bool deleteUser(int userId)
+        {
+            try
             {
-                tmp = dataTable.NewRow();
-                tmp["Id"] = user.UserId;
-                tmp["Username"] = user.Username;
-                if (user.Role != null)
-                {
-                    tmp["Role"] = user.Role.RoleName;
-                } else
-                {
-                    tmp["Role"] = "----------";
-                }
-                dataTable.Rows.Add(tmp);
+                userDAO.Delete(userId);
+                userDAO.Save();
+                return true;
             }
-            return dataTable;
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
 

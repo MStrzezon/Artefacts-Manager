@@ -40,6 +40,10 @@ namespace ArtefactsManager.Data
 
         public DbSet<AttributeArtefactType> AttributesArtefactsTypes { get; set; }
 
+        public DbSet<RolePermission> RolesPermissions { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -56,6 +60,7 @@ namespace ArtefactsManager.Data
 
             modelBuilder.Entity<AttributeArtefactType>().HasKey(aat => new { aat.AttributeId, aat.ArtefactTypeId });
 
+            modelBuilder.Entity<RolePermission>().HasKey(rp => new { rp.RoleId, rp.PermissionId });
         }
 
     }

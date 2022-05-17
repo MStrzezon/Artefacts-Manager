@@ -30,7 +30,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
 
         public Role GetById(int roleId)
         {
-            return _context.Roles.Find(roleId);
+            return _context.Roles.Include(r => r.rolePermissions).Where(r => r.RoleId == roleId).FirstOrDefault();
         }
 
         public void Insert(Role role)

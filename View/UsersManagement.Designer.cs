@@ -30,11 +30,20 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewUser = new System.Windows.Forms.DataGridView();
+            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EditUser = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteUser = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.addUserBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewRole = new System.Windows.Forms.DataGridView();
+            this.RoleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EditRole = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteRole = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.addRoleBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -75,7 +84,14 @@
             // dataGridViewUser
             // 
             this.dataGridViewUser.AllowUserToAddRows = false;
+            this.dataGridViewUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.UserId,
+            this.Username,
+            this.Role,
+            this.EditUser,
+            this.DeleteUser});
             this.dataGridViewUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewUser.Location = new System.Drawing.Point(0, 65);
             this.dataGridViewUser.Name = "dataGridViewUser";
@@ -84,6 +100,46 @@
             this.dataGridViewUser.Size = new System.Drawing.Size(434, 326);
             this.dataGridViewUser.TabIndex = 2;
             this.dataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellContentClick);
+            // 
+            // UserId
+            // 
+            this.UserId.HeaderText = "UserId";
+            this.UserId.MinimumWidth = 6;
+            this.UserId.Name = "UserId";
+            this.UserId.Visible = false;
+            this.UserId.Width = 125;
+            // 
+            // Username
+            // 
+            this.Username.HeaderText = "Username";
+            this.Username.MinimumWidth = 6;
+            this.Username.Name = "Username";
+            this.Username.ReadOnly = true;
+            this.Username.Width = 99;
+            // 
+            // Role
+            // 
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 6;
+            this.Role.Name = "Role";
+            this.Role.ReadOnly = true;
+            this.Role.Width = 65;
+            // 
+            // EditUser
+            // 
+            this.EditUser.HeaderText = "";
+            this.EditUser.MinimumWidth = 6;
+            this.EditUser.Name = "EditUser";
+            this.EditUser.ReadOnly = true;
+            this.EditUser.Width = 6;
+            // 
+            // DeleteUser
+            // 
+            this.DeleteUser.HeaderText = "";
+            this.DeleteUser.MinimumWidth = 6;
+            this.DeleteUser.Name = "DeleteUser";
+            this.DeleteUser.ReadOnly = true;
+            this.DeleteUser.Width = 6;
             // 
             // panel3
             // 
@@ -130,7 +186,14 @@
             // 
             // dataGridViewRole
             // 
+            this.dataGridViewRole.AllowUserToAddRows = false;
+            this.dataGridViewRole.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewRole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRole.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.RoleId,
+            this.Name,
+            this.EditRole,
+            this.DeleteRole});
             this.dataGridViewRole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewRole.Location = new System.Drawing.Point(0, 65);
             this.dataGridViewRole.Name = "dataGridViewRole";
@@ -138,6 +201,40 @@
             this.dataGridViewRole.RowTemplate.Height = 24;
             this.dataGridViewRole.Size = new System.Drawing.Size(362, 326);
             this.dataGridViewRole.TabIndex = 2;
+            this.dataGridViewRole.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRole_CellContentClick);
+            // 
+            // RoleId
+            // 
+            this.RoleId.HeaderText = "RoleId";
+            this.RoleId.MinimumWidth = 6;
+            this.RoleId.Name = "RoleId";
+            this.RoleId.ReadOnly = true;
+            this.RoleId.Visible = false;
+            this.RoleId.Width = 125;
+            // 
+            // Name
+            // 
+            this.Name.HeaderText = "Name";
+            this.Name.MinimumWidth = 6;
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            this.Name.Width = 73;
+            // 
+            // EditRole
+            // 
+            this.EditRole.HeaderText = "";
+            this.EditRole.MinimumWidth = 6;
+            this.EditRole.Name = "EditRole";
+            this.EditRole.Text = "Edit";
+            this.EditRole.Width = 6;
+            // 
+            // DeleteRole
+            // 
+            this.DeleteRole.HeaderText = "";
+            this.DeleteRole.MinimumWidth = 6;
+            this.DeleteRole.Name = "DeleteRole";
+            this.DeleteRole.Text = "Delete";
+            this.DeleteRole.Width = 6;
             // 
             // panel4
             // 
@@ -159,6 +256,7 @@
             this.addRoleBtn.TabIndex = 1;
             this.addRoleBtn.Text = "New";
             this.addRoleBtn.UseVisualStyleBackColor = false;
+            this.addRoleBtn.Click += new System.EventHandler(this.addRoleBtn_Click);
             // 
             // panel2
             // 
@@ -187,8 +285,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "UsersManagement";
-            this.Text = "UsersManagement";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -218,5 +314,14 @@
         private System.Windows.Forms.DataGridView dataGridViewRole;
         private System.Windows.Forms.Button addUserBtn;
         private System.Windows.Forms.Button addRoleBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
+        private System.Windows.Forms.DataGridViewButtonColumn EditUser;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoleId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewButtonColumn EditRole;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteRole;
     }
 }
