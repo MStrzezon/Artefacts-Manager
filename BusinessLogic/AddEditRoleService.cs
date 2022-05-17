@@ -9,20 +9,22 @@ using System.Windows.Forms;
 
 namespace ArtefactsManager.BusinessLogic
 {
-    public class AddEditService
+    public class AddEditRoleService
     {
         private readonly CategoryDAO categoryDAO;
         private readonly ArtefactTypeDAO artefactTypeDAO;
         private readonly RoleDAO roleDAO;
         private readonly PermissionDAO permissionDAO;
+        private readonly RolePermissionDAO rolePermissionDAO;
         Role role;
 
-        public AddEditService()
+        public AddEditRoleService()
         {
             categoryDAO = new CategoryDAO();
             artefactTypeDAO = new ArtefactTypeDAO();
             roleDAO = new RoleDAO();
             permissionDAO = new PermissionDAO();
+            rolePermissionDAO = new RolePermissionDAO();
             role = new Role();
         }
 
@@ -42,13 +44,23 @@ namespace ArtefactsManager.BusinessLogic
             return role;
         }
 
+        public IEnumerable<Permission> getPermissionsForRole()
+        {
+            return permissionDAO.GetByRole(role.RoleId);
+        }
+
         public bool updateRole(DataGridViewRowCollection rows)
         {
-            Permission permissionToAdd;
+            List<Permission> oldPermissions = permissionDAO.GetByRole(role.RoleId).ToList();
+            Console.WriteLine(oldPermissions.Count);
             try
             {
                 foreach (Permission permission in getPermissions(rows))
                 {
+                    if (oldPermissions.Contains(permission))
+                    {
+                        oldPermissions.Remove(permission);
+                    }
                     if (!ifExist(permission))
                     {
                         role.rolePermissions.Add(new RolePermission { Role = role, Permission = permission });
@@ -56,9 +68,14 @@ namespace ArtefactsManager.BusinessLogic
                     }
                     else
                     {
-                        permissionToAdd = getPermission(permission);
-                        role.rolePermissions.Add(new RolePermission { Role = role, Permission = permissionToAdd });
+                        role.rolePermissions.Add(new RolePermission { Role = role, Permission = getPermission(permission) });
                     }
+                }
+                foreach (Permission oldPermission in oldPermissions)
+                {
+                    Console.WriteLine(oldPermission.TypeName);
+                    rolePermissionDAO.Delete(role.RoleId, oldPermission.PermissionId);
+                    rolePermissionDAO.Save();
                 }
                 roleDAO.Save();
                 return true;

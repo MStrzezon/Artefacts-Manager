@@ -16,11 +16,11 @@ namespace ArtefactsManager.View
     {
         private Role role;
         private bool edit;
-        private readonly AddEditService addEditService;
+        private readonly AddEditRoleService addEditService;
         public AddEditRole(bool _edit, int roleId)
         {
             InitializeComponent();
-            addEditService = new AddEditService();
+            addEditService = new AddEditRoleService();
             if (_edit)
             {
                 nameBox.ReadOnly = true;
@@ -28,9 +28,17 @@ namespace ArtefactsManager.View
                 edit = _edit;
                 role = addEditService.getRole(roleId);
                 nameBox.Text = role.RoleName;
+                loadPermissions();
             }
             loadCategories();
             loadTypes();
+        }
+
+        private void loadPermissions()
+        {
+            foreach (Permission permission in addEditService.getPermissionsForRole().ToList()) {
+                dataGridViewPermissions.Rows.Add(permission.CategoryName, permission.TypeName, permission.Visible, permission.Editable, permission.Editable, "Delete");
+            }
         }
 
         private void loadCategories()

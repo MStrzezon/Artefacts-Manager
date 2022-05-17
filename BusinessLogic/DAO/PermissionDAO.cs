@@ -59,6 +59,11 @@ namespace ArtefactsManager.BusinessLogic.DAO
             return _context.Permissions.Where(p => p.CategoryName == category).Where(p => p.TypeName == type).Where(p =>p.Visible == visible).Where(p => p.Editable == editable).Where(p => p.CanAdd == canAdd).FirstOrDefault();
         }
 
+        public IEnumerable<Permission> GetByRole(int roleId)
+        {
+            List<int> permissionsId = _context.RolesPermissions.Where(p => p.RoleId == roleId).Select(p => p.PermissionId).ToList();
+            return _context.Permissions.Where(p => permissionsId.Contains(p.PermissionId));
+        }
 
     }
 }

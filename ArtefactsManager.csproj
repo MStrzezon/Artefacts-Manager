@@ -159,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\AccountService.cs" />
-    <Compile Include="BusinessLogic\AddEditService.cs" />
+    <Compile Include="BusinessLogic\AddEditRoleService.cs" />
     <Compile Include="BusinessLogic\AddUserService.cs" />
     <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
     <Compile Include="BusinessLogic\CatalogService.cs" />
@@ -175,10 +175,12 @@
     <Compile Include="BusinessLogic\DAO\IAttributeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\ICategoryDAO.cs" />
     <Compile Include="BusinessLogic\DAO\IPermissionDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\IRolePermissionDAO.cs" />
     <Compile Include="BusinessLogic\DAO\IUserDao.cs" />
     <Compile Include="BusinessLogic\DAO\IRoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\PermissionDAO.cs" />
     <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
+    <Compile Include="BusinessLogic\DAO\RolePermissionDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
     <Compile Include="BusinessLogic\EditUserService.cs" />
     <Compile Include="BusinessLogic\ElementService.cs" />

@@ -17,5 +17,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         void Save();
 
         Permission GetByAttributes(string category, string type, bool visible, bool editable, bool canAdd);
+
+        IEnumerable<Permission> GetByRole(int roleId);
     }
 }
