@@ -103,7 +103,7 @@ namespace ArtefactsManager.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Add addWindow = new Add();
+            AddArtefact addWindow = new AddArtefact();
             addWindow.ShowDialog();
             refreshTable();
         }

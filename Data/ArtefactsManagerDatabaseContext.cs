@@ -49,6 +49,7 @@ namespace ArtefactsManager.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.EnableSensitiveDataLogging();
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("Server=localhost;Database=Artefacts_Manager_Database;user=artefact_manager;password=artefact_manager");
             }

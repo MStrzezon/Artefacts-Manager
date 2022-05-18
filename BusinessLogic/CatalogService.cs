@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArtefactsManager.BusinessLogic.DAO;
 using ArtefactsManager.Data.Models;
+using ArtefactsManager.BusinessLogic;
 
 namespace ArtefactsManager.BusinessLogic
 {
@@ -18,6 +19,7 @@ namespace ArtefactsManager.BusinessLogic
         private readonly IArtefactTypeDAO artefactTypeDAO;
         private readonly IAttributeDAO attributeDAO;
         private readonly IArtefactAttributeDAO artefactAttributeDAO;
+        private readonly VisibilityService visibilityService;
 
         public CatalogService()
         {
@@ -26,11 +28,12 @@ namespace ArtefactsManager.BusinessLogic
             artefactTypeDAO = new ArtefactTypeDAO();
             attributeDAO = new AttributeDAO();
             artefactAttributeDAO = new ArtefactAttributeDAO();
+            visibilityService = new VisibilityService();
         }
 
         public IEnumerable<Category> getCategories()
         {
-            return categoryDAO.GetAll();
+            return visibilityService.GetVisibleCategories(categoryDAO.GetAll().ToList());
         }
 
         public IEnumerable<ArtefactType> getTypes()
@@ -40,7 +43,7 @@ namespace ArtefactsManager.BusinessLogic
 
         public IEnumerable<ArtefactType> getTypesByCategory(int categoryId)
         {
-            return artefactTypeDAO.GetByCategory(categoryId);
+            return visibilityService.GetVisibleTypes(categoryDAO.GetById(categoryId).CategoryName, artefactTypeDAO.GetByCategory(categoryId).ToList());
         }
 
         public IEnumerable<Category> getCategoriesByArtefactName(string artefactName)

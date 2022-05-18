@@ -1,6 +1,6 @@
 ﻿namespace ArtefactsManager.View
 {
-    partial class Add
+    partial class AddArtefact
     {
         /// <summary>
         /// Required designer variable.

@@ -52,28 +52,30 @@ namespace ArtefactsManager.BusinessLogic
         public bool updateRole(DataGridViewRowCollection rows)
         {
             List<Permission> oldPermissions = permissionDAO.GetByRole(role.RoleId).ToList();
-            Console.WriteLine(oldPermissions.Count);
+
             try
             {
                 foreach (Permission permission in getPermissions(rows))
                 {
-                    if (oldPermissions.Contains(permission))
-                    {
-                        oldPermissions.Remove(permission);
-                    }
                     if (!ifExist(permission))
                     {
                         role.rolePermissions.Add(new RolePermission { Role = role, Permission = permission });
-
                     }
                     else
                     {
-                        role.rolePermissions.Add(new RolePermission { Role = role, Permission = getPermission(permission) });
+                        Permission permissionInDb  = getPermission(permission);
+                        if (oldPermissions.Contains(permissionInDb))
+                        {
+                            oldPermissions.Remove(permissionInDb);
+                        } else
+                        {
+                            role.rolePermissions.Add(new RolePermission { RoleId = role.RoleId, PermissionId = permissionInDb.PermissionId });
+
+                        }
                     }
                 }
                 foreach (Permission oldPermission in oldPermissions)
                 {
-                    Console.WriteLine(oldPermission.TypeName);
                     rolePermissionDAO.Delete(role.RoleId, oldPermission.PermissionId);
                     rolePermissionDAO.Save();
                 }

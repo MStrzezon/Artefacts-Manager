@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArtefactsManager.BusinessLogic.DAO;
 using ArtefactsManager.Data.Models;
+using ArtefactsManager.Utils;
 
 namespace ArtefactsManager.BusinessLogic
 {
@@ -14,12 +15,14 @@ namespace ArtefactsManager.BusinessLogic
         private readonly IArtefactTypeDAO artefactTypeDAO;
         private readonly IAttributeDAO attributeDAO;
         private readonly IArtefactDAO artefactDAO;
+        private readonly IUserDao userDao;
 
         public ElementService()
         {
             artefactTypeDAO = new ArtefactTypeDAO();
             attributeDAO = new AttributeDAO();
             artefactDAO = new ArtefactDAO();
+            userDao = new UserDAO();
         }
 
         public IEnumerable<ArtefactType> getAllArtefactsTypes()
@@ -81,6 +84,7 @@ namespace ArtefactsManager.BusinessLogic
                 attributesList.Add(new ArtefactAttribute { Attribute = entry.Key, Value = entry.Value });
             }
             artefact.ArtefactAttributes = attributesList;
+            artefact.Owner = userDao.GetById(LoggedUser.UserId); 
             artefactDAO.Save(); 
             return true;
         }

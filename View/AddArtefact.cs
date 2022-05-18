@@ -12,12 +12,12 @@ using ArtefactsManager.Data.Models;
 
 namespace ArtefactsManager.View
 {
-    public partial class Add : Form
+    public partial class AddArtefact : Form
     {
         private readonly CategoryService categoryService;
         private readonly ElementService elementService;
         private readonly CatalogService catalogService;
-        public Add()
+        public AddArtefact()
         {
             InitializeComponent();
             categoryService = new CategoryService();

@@ -185,7 +185,9 @@
     <Compile Include="BusinessLogic\EditUserService.cs" />
     <Compile Include="BusinessLogic\ElementService.cs" />
     <Compile Include="BusinessLogic\RolesManagementService.cs" />
+    <Compile Include="BusinessLogic\UserPermissions.cs" />
     <Compile Include="BusinessLogic\UsersManagementService.cs" />
+    <Compile Include="BusinessLogic\VisibilityService.cs" />
     <Compile Include="Data\ArtefactsManagerDatabaseContext.cs" />
     <Compile Include="Data\Models\Artefact.cs" />
     <Compile Include="Data\Models\ArtefactAttribute.cs" />
@@ -250,6 +252,14 @@
     <Compile Include="Migrations\20220517082250_edit_permission_table.designer.cs">
       <DependentUpon>20220517082250_edit_permission_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220517162626_add_owner_to_attribute.cs" />
+    <Compile Include="Migrations\20220517162626_add_owner_to_attribute.designer.cs">
+      <DependentUpon>20220517162626_add_owner_to_attribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220517163132_add_owner_to_artefact.cs" />
+    <Compile Include="Migrations\20220517163132_add_owner_to_artefact.designer.cs">
+      <DependentUpon>20220517163132_add_owner_to_artefact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Credentials.cs" />
     <Compile Include="Utils\Encryption.cs" />
@@ -260,11 +270,11 @@
     <Compile Include="View\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Add.cs">
+    <Compile Include="View\AddArtefact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Add.Designer.cs">
-      <DependentUpon>Add.cs</DependentUpon>
+    <Compile Include="View\AddArtefact.Designer.cs">
+      <DependentUpon>AddArtefact.cs</DependentUpon>
     </Compile>
     <Compile Include="View\AddEditRole.cs">
       <SubType>Form</SubType>
@@ -325,8 +335,8 @@
     <EmbeddedResource Include="View\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Add.resx">
-      <DependentUpon>Add.cs</DependentUpon>
+    <EmbeddedResource Include="View\AddArtefact.resx">
+      <DependentUpon>AddArtefact.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AddEditRole.resx">
       <DependentUpon>AddEditRole.cs</DependentUpon>

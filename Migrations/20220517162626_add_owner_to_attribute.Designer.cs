@@ -3,14 +3,16 @@ using System;
 using ArtefactsManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtefactsManager.Migrations
 {
     [DbContext(typeof(ArtefactsManagerDatabaseContext))]
-    partial class ArtefactsManagerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220517162626_add_owner_to_attribute")]
+    partial class add_owner_to_attribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,16 +37,11 @@ namespace ArtefactsManager.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("OwnerUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("ArtefactId");
 
                     b.HasIndex("ArtefactTypeId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("OwnerUserId");
 
                     b.ToTable("Artefacts");
                 });
@@ -90,7 +87,12 @@ namespace ArtefactsManager.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int?>("OwnerUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("AttributeId");
+
+                    b.HasIndex("OwnerUserId");
 
                     b.ToTable("Attributes");
                 });
@@ -213,10 +215,6 @@ namespace ArtefactsManager.Migrations
                     b.HasOne("ArtefactsManager.Data.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
-
-                    b.HasOne("ArtefactsManager.Data.Models.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerUserId");
                 });
 
             modelBuilder.Entity("ArtefactsManager.Data.Models.ArtefactAttribute", b =>
@@ -232,6 +230,13 @@ namespace ArtefactsManager.Migrations
                         .HasForeignKey("AttributeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ArtefactsManager.Data.Models.Attribute", b =>
+                {
+                    b.HasOne("ArtefactsManager.Data.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerUserId");
                 });
 
             modelBuilder.Entity("ArtefactsManager.Data.Models.AttributeArtefactType", b =>

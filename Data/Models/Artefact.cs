@@ -12,6 +12,8 @@ namespace ArtefactsManager.Data.Models
 
         public string Name { get; set; }
 
+        public User Owner { get; set; }
+
         public DateTime Created { get; set; }
 
         public ArtefactType ArtefactType { get; set; }

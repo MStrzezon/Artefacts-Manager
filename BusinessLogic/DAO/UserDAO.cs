@@ -57,7 +57,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
 
         public User getUser(string username, string password)
         {
-            return (from u in _context.Users where u.Username == username && u.Password == password select u).FirstOrDefault<User>();
+            return (from u in _context.Users where u.Username == username && u.Password == password select u).Include(u => u.Role).FirstOrDefault<User>();
         }
 
         public IEnumerable<User> getUsersByRole(int roleId)
