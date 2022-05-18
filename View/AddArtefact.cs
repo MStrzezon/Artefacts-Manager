@@ -30,8 +30,8 @@ namespace ArtefactsManager.View
         private void loadCategories()
         {
             categoryBox.Items.Clear();
-            categoryBox.Tag = catalogService.getCategories();
-            foreach (Category c in catalogService.getCategories())
+            categoryBox.Tag = elementService.getCategories();
+            foreach (Category c in elementService.getCategories())
             {
                 categoryBox.Items.Add(c.CategoryName);
             }
@@ -40,8 +40,8 @@ namespace ArtefactsManager.View
         private void loadtypes()
         {
             typeBox.Items.Clear();
-            typeBox.Tag = elementService.getAllArtefactsTypes();
-            foreach (ArtefactType artefactType in elementService.getAllArtefactsTypes())
+            typeBox.Tag = elementService.getTypes();
+            foreach (ArtefactType artefactType in elementService.getTypes())
             {
                 typeBox.Items.Add(artefactType.TypeName);
             }
@@ -49,8 +49,11 @@ namespace ArtefactsManager.View
 
         private void Add_Load(object sender, EventArgs e)
         {
-            chooseBox.SelectedIndex = 0;
-            typeBox.SelectedIndex = 0;
+            if (chooseBox.Items.Count > 0 && typeBox.Items.Count > 0)
+            {
+                chooseBox.SelectedIndex = 0;
+                typeBox.SelectedIndex = 0;
+            }
         }
 
         private void load_textBoxes()

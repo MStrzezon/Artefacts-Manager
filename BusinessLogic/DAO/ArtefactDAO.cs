@@ -25,7 +25,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
 
         public IEnumerable<Artefact> GetAll()
         {
-            return _context.Artefacts.ToList();
+            return _context.Artefacts.Include("Category").Include("ArtefactType").Include("Owner").ToList();
         }
 
         public Artefact GetById(int artefactId)
@@ -74,7 +74,7 @@ namespace ArtefactsManager.BusinessLogic.DAO
         public IEnumerable<Artefact> GetByType(int typeId)
         {
             return _context.Artefacts.Where(a => a.ArtefactType.ArtefactTypeId == typeId).Include("Category").Include("ArtefactType")
-                .Include("ArtefactAttributes").ToList();
+                .Include("ArtefactAttributes").Include("Owner").ToList();
         }
 
         public IEnumerable<Artefact> GetByTypeAndName(int typeId, string name)

@@ -20,6 +20,8 @@ namespace ArtefactsManager.BusinessLogic
         private readonly IAttributeDAO attributeDAO;
         private readonly IArtefactAttributeDAO artefactAttributeDAO;
         private readonly VisibilityService visibilityService;
+        private readonly EditableService editableService;
+        private readonly RemovableService removableService;
 
         public CatalogService()
         {
@@ -29,6 +31,8 @@ namespace ArtefactsManager.BusinessLogic
             attributeDAO = new AttributeDAO();
             artefactAttributeDAO = new ArtefactAttributeDAO();
             visibilityService = new VisibilityService();
+            editableService = new EditableService();
+            removableService = new RemovableService();
         }
 
         public IEnumerable<Category> getCategories()
@@ -36,9 +40,14 @@ namespace ArtefactsManager.BusinessLogic
             return visibilityService.GetVisibleCategories(categoryDAO.GetAll().ToList());
         }
 
+        public IEnumerable<Category> getCategoriesByArtefactName(string artefactName)
+        {
+            return visibilityService.GetVisibleCategories(categoryDAO.GetByArtefactName(artefactName).ToList());
+        }
+
         public IEnumerable<ArtefactType> getTypes()
         {
-            return artefactTypeDAO.GetAll();
+            return visibilityService.GetVisibleTypes("All categories", artefactTypeDAO.GetAll().ToList());
         }
 
         public IEnumerable<ArtefactType> getTypesByCategory(int categoryId)
@@ -46,14 +55,9 @@ namespace ArtefactsManager.BusinessLogic
             return visibilityService.GetVisibleTypes(categoryDAO.GetById(categoryId).CategoryName, artefactTypeDAO.GetByCategory(categoryId).ToList());
         }
 
-        public IEnumerable<Category> getCategoriesByArtefactName(string artefactName)
-        {
-            return categoryDAO.GetByArtefactName(artefactName);
-        }
-
         public IEnumerable<ArtefactType> getTypesByCategoryAndArtefactName(int categoryId, string artefactName)
         {
-            return artefactTypeDAO.GetByCategoryAndArtefactName(categoryId, artefactName);
+            return visibilityService.GetVisibleTypes(categoryDAO.GetById(categoryId).CategoryName, artefactTypeDAO.GetByCategoryAndArtefactName(categoryId, artefactName).ToList());
         }
 
         public IEnumerable<ArtefactType> getTypesByArtefactName(string artefactName)
@@ -71,6 +75,41 @@ namespace ArtefactsManager.BusinessLogic
             loadRows(dataTable, showingArtefacts);
             return dataTable;
         }
+
+
+        public DataTable getDataTableByName(int categoryId, int typeId, string name)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByCategoryAndTypeAndName(categoryId, typeId, name).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, visibilityService.GetVisibleArtefacts(showingArtefacts));
+            return dataTable;
+        }
+
+        public DataTable getDataTableByType(int typeId)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByType(typeId).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, visibilityService.GetVisibleArtefacts(showingArtefacts));
+            return dataTable;
+        }
+
+        public DataTable getDataTableByTypeAndName(int typeId, string name)
+        {
+            List<Artefact> showingArtefacts = artefactDAO.GetByTypeAndName(typeId, name).ToList();
+            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
+
+            DataTable dataTable = new DataTable();
+            loadColumns(dataTable, attributes);
+            loadRows(dataTable, showingArtefacts);
+            return dataTable;
+        }
+
 
         private void loadColumns(DataTable dataTable, IEnumerable<Data.Models.Attribute> attributes)
         {
@@ -104,43 +143,20 @@ namespace ArtefactsManager.BusinessLogic
             }
         }
 
+        public IEnumerable<Artefact> getEditableArtefacts()
+        {
+            return editableService.GetEditableArtefacts(artefactDAO.GetAll().ToList());
+        }
+
+        public IEnumerable<Artefact> getRemovableArtefacts()
+        {
+            return removableService.GetRemovableArtefacts(artefactDAO.GetAll().ToList());
+        }
+
         public void deleteArtefact(int artefactId)
         {
             artefactDAO.Delete(artefactId);
             artefactDAO.Save();
-        }
-
-        public DataTable getDataTableByName(int categoryId, int typeId, string name)
-        {
-            List<Artefact> showingArtefacts = artefactDAO.GetByCategoryAndTypeAndName(categoryId, typeId, name).ToList();
-            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
-
-            DataTable dataTable = new DataTable();
-            loadColumns(dataTable, attributes);
-            loadRows(dataTable, showingArtefacts);
-            return dataTable;
-        }
-
-        public DataTable getDataTableByType(int typeId)
-        {
-            List<Artefact> showingArtefacts = artefactDAO.GetByType(typeId).ToList();
-            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
-
-            DataTable dataTable = new DataTable();
-            loadColumns(dataTable, attributes);
-            loadRows(dataTable, showingArtefacts);
-            return dataTable;
-        }
-
-        public DataTable getDataTableByTypeAndName(int typeId, string name)
-        {
-            List<Artefact> showingArtefacts = artefactDAO.GetByTypeAndName(typeId, name).ToList();
-            List<Data.Models.Attribute> attributes = attributeDAO.GetByArtefactType(typeId).ToList();
-
-            DataTable dataTable = new DataTable();
-            loadColumns(dataTable, attributes);
-            loadRows(dataTable, showingArtefacts);
-            return dataTable;
         }
     }
 }

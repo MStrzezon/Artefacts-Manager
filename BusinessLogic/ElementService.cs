@@ -16,6 +16,7 @@ namespace ArtefactsManager.BusinessLogic
         private readonly IAttributeDAO attributeDAO;
         private readonly IArtefactDAO artefactDAO;
         private readonly IUserDao userDao;
+        private readonly CanAddService canAddService;
 
         public ElementService()
         {
@@ -23,18 +24,24 @@ namespace ArtefactsManager.BusinessLogic
             attributeDAO = new AttributeDAO();
             artefactDAO = new ArtefactDAO();
             userDao = new UserDAO();
+            canAddService = new CanAddService();
         }
 
-        public IEnumerable<ArtefactType> getAllArtefactsTypes()
+
+        public IEnumerable<Category> getCategories()
         {
-            return artefactTypeDAO.GetAll();
+            return canAddService.canAddCategory();
+        }
+
+        public IEnumerable<ArtefactType> getTypes()
+        {
+            return canAddService.canAddType();
         }
 
         private IEnumerable<Data.Models.Attribute> getAllAttributesByArtefactType(string ArtefactTypeName)
         {
             int artefactTypeId = artefactTypeDAO.GetByName(ArtefactTypeName).ArtefactTypeId;
             return attributeDAO.GetByArtefactType(artefactTypeId);
-
         }
 
         public List<TextBox> loadTextBoxes(string ArtefactTypeName)

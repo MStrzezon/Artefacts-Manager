@@ -77,7 +77,8 @@ namespace ArtefactsManager.View
                 {
                     loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
                 }
-            } else
+            }
+            else
             {
                 if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
                 {
@@ -96,8 +97,14 @@ namespace ArtefactsManager.View
         {
             if (categoriesBox.SelectedIndex != -1 && typeBox.SelectedIndex != -1)
             {
-                loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
-                createButtonColumns();
+                try
+                {
+                    loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                    createButtonColumns();
+                } catch (ArgumentOutOfRangeException ex)
+                {
+                    loadTableByType(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
+                }
             }
         }
 
@@ -106,6 +113,7 @@ namespace ArtefactsManager.View
             AddArtefact addWindow = new AddArtefact();
             addWindow.ShowDialog();
             refreshTable();
+            searchBox.Text = String.Empty;
         }
 
 
@@ -114,25 +122,26 @@ namespace ArtefactsManager.View
             DataGridViewButtonColumn editBtn = new DataGridViewButtonColumn();
             DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn();
             editBtn.Text = "Edit";
-            editBtn.UseColumnTextForButtonValue = true;
             deleteBtn.Text = "Delete";
-            deleteBtn.UseColumnTextForButtonValue = true;
             dataGridView.Columns.Add(editBtn);
             dataGridView.Columns.Add(deleteBtn);
+
+            lockEditButton();
         }
 
 
         private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            Console.WriteLine(e.ColumnIndex);
+            if (e.RowIndex >= 0)
             {
-                if (e.ColumnIndex == dataGridView.Columns.Count-2)
+                if (e.ColumnIndex == dataGridView.Columns.Count - 2 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count-2].Value == "Edit")
                 {
                     Edit edit = new Edit(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
                     edit.ShowDialog();
                     catalogService = new CatalogService();
                 }
-                else if (e.ColumnIndex == dataGridView.Columns.Count-1)
+                else if (e.ColumnIndex == dataGridView.Columns.Count - 1 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count - 1].Value == "Delete")
                 {
                     if (MessageBox.Show("Are you want to delete student record?", "Information", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -157,7 +166,8 @@ namespace ArtefactsManager.View
                 if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
                 {
                     loadTypes();
-                } else
+                }
+                else
                 {
                     loadTypesByCategory();
                 }
@@ -187,7 +197,8 @@ namespace ArtefactsManager.View
             if (categoriesBox.SelectedIndex == -1)
             {
                 return null;
-            } else
+            }
+            else
             {
                 return categoriesBox.Items[categoriesBox.SelectedIndex].ToString();
             }
@@ -198,7 +209,8 @@ namespace ArtefactsManager.View
             if (typeBox.SelectedIndex == -1)
             {
                 return null;
-            } else
+            }
+            else
             {
                 return typeBox.Items[typeBox.SelectedIndex].ToString();
             }
@@ -211,7 +223,13 @@ namespace ArtefactsManager.View
 
         private void setTypeIndex(string typeName)
         {
-           typeBox.SelectedIndex = typeBox.Items.IndexOf((typeName));
+            if (typeName == null)
+            {
+                typeBox.SelectedIndex = 0;
+            } else
+            {
+                typeBox.SelectedIndex = typeBox.Items.IndexOf((typeName));
+            }
         }
 
         private void loadCategoriesByName(string name)
@@ -297,5 +315,26 @@ namespace ArtefactsManager.View
             dataGridView.DataSource = catalogService.getDataTableByTypeAndName(typeId, name);
             dataGridView.Columns[0].Visible = false;
         }
+
+        private void lockEditButton()
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (catalogService.getEditableArtefacts().Select(a => a.ArtefactId).Contains(Convert.ToInt32(row.Cells[0].Value)))
+                {
+                    ((DataGridViewButtonCell)row.Cells[dataGridView.Columns.Count - 2]).Value = "Edit";
+                }
+                if (catalogService.getRemovableArtefacts().Select(a => a.ArtefactId).Contains(Convert.ToInt32(row.Cells[0].Value)))
+                {
+                    ((DataGridViewButtonCell)row.Cells[dataGridView.Columns.Count - 1]).Value = "Delete";
+                }
+            }
+        }
+
+        private void Catalog_Shown(object sender, EventArgs e)
+        {
+            typeBox_SelectedIndexChanged(null, null);
+        }
     }
 }
+

@@ -61,10 +61,29 @@ namespace ArtefactsManager.View
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            dataGridViewPermissions.Rows.Add(categoriesList.Items[categoriesList.SelectedIndex].ToString(), typesList.Items[typesList.SelectedIndex].ToString(), visibleCheck.Checked, editableCheck.Checked, addCheck.Checked, "Delete");
+            if (!IsDuplicate())
+            {
+                dataGridViewPermissions.Rows.Add(categoriesList.Items[categoriesList.SelectedIndex].ToString(), typesList.Items[typesList.SelectedIndex].ToString(), visibleCheck.Checked, editableCheck.Checked, addCheck.Checked, "Delete");
+            } else
+            {
+                MessageBox.Show("This row already exists!");
+            }
         }
 
-        private void dataGridViewPermissions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    private bool IsDuplicate()
+    {
+        for (int i = 0; i < dataGridViewPermissions.Rows.Count; i++)
+        {
+            if (categoriesList.Items[categoriesList.SelectedIndex].ToString() == dataGridViewPermissions.Rows[i].Cells[0].Value.ToString() && typesList.Items[typesList.SelectedIndex].ToString() == dataGridViewPermissions.Rows[i].Cells[1].Value.ToString() && visibleCheck.Checked == Convert.ToBoolean(dataGridViewPermissions.Rows[i].Cells[2].Value) && editableCheck.Checked == Convert.ToBoolean(dataGridViewPermissions.Rows[i].Cells[3].Value) &&  addCheck.Checked == Convert.ToBoolean(dataGridViewPermissions.Rows[i].Cells[4].Value))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private void dataGridViewPermissions_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             {
                 if (e.RowIndex >= 0)

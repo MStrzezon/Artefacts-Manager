@@ -77,6 +77,10 @@ namespace ArtefactsManager.BusinessLogic.DAO
             return artefactsByName.Select(c => c.ArtefactType).Distinct().ToList();
         }
 
+        public IEnumerable<ArtefactType> GetByArtefactsNames(List<string> artefactsNames)
+        {
+            return _context.ArtefactsTypes.Where(t => artefactsNames.Contains(t.TypeName)).ToList();
+        }
 
     }
 }

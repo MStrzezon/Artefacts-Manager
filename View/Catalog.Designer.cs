@@ -171,6 +171,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "Catalog";
             this.Text = "Catalog";
+            this.Shown += new System.EventHandler(this.Catalog_Shown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

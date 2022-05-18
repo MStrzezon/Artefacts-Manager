@@ -162,6 +162,7 @@
     <Compile Include="BusinessLogic\AddEditRoleService.cs" />
     <Compile Include="BusinessLogic\AddUserService.cs" />
     <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
+    <Compile Include="BusinessLogic\CanAddService.cs" />
     <Compile Include="BusinessLogic\CatalogService.cs" />
     <Compile Include="BusinessLogic\CategoryService.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactAttributeDAO.cs" />
@@ -182,8 +183,10 @@
     <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\RolePermissionDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
+    <Compile Include="BusinessLogic\EditableService.cs" />
     <Compile Include="BusinessLogic\EditUserService.cs" />
     <Compile Include="BusinessLogic\ElementService.cs" />
+    <Compile Include="BusinessLogic\RemovableService.cs" />
     <Compile Include="BusinessLogic\RolesManagementService.cs" />
     <Compile Include="BusinessLogic\UserPermissions.cs" />
     <Compile Include="BusinessLogic\UsersManagementService.cs" />

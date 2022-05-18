@@ -38,5 +38,19 @@ namespace ArtefactsManager.BusinessLogic
             }
             return visibleTypes;
         }
+
+        public IEnumerable<Artefact> GetVisibleArtefacts(List<Artefact> artefacts)
+        {
+            List<Artefact> filtredArtefacts = new List<Artefact>();
+            List<string> categoriesUnvisible = UserPermissions.Permissions.Where(u => u.Visible == false).Select(u => u.CategoryName).ToList();
+            foreach (Artefact artefact in artefacts)
+            {
+                if (!categoriesUnvisible.Contains(artefact.Category.CategoryName))
+                {
+                    filtredArtefacts.Add(artefact);
+                }
+            }
+            return filtredArtefacts;
+        }
     }
 }
