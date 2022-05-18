@@ -7,22 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ArtefactsManager.BusinessLogic;
+using ArtefactsManager.BusinessLogic.Catalog;
 using ArtefactsManager.Data.Models;
 
 namespace ArtefactsManager.View
 {
     public partial class AddArtefact : Form
     {
-        private readonly CategoryService categoryService;
-        private readonly ElementService elementService;
-        private readonly CatalogService catalogService;
+        private readonly AddCategoryService categoryService;
+        private readonly AddElementService elementService;
         public AddArtefact()
         {
             InitializeComponent();
-            categoryService = new CategoryService();
-            elementService = new ElementService();
-            catalogService = new CatalogService();
+            categoryService = new AddCategoryService();
+            elementService = new AddElementService();
             loadtypes();
             loadCategories();
         }
@@ -102,7 +100,7 @@ namespace ArtefactsManager.View
 
         private void AddType_Click(object sender, EventArgs e)
         {
-            AddType addType = new AddType();
+            AddArtefactType addType = new AddArtefactType();
             addType.ShowDialog();
             loadtypes();
         }

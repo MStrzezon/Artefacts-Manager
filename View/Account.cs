@@ -1,4 +1,4 @@
-﻿using ArtefactsManager.BusinessLogic;
+﻿using ArtefactsManager.BusinessLogic.UserAccount;
 using ArtefactsManager.Utils;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ArtefactsManager.BusinessLogic.Login;
 
 namespace ArtefactsManager.View
 {

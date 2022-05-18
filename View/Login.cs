@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ArtefactsManager.Presenters;
+using ArtefactsManager.BusinessLogic.Login;
 using ArtefactsManager.Utils;
 
 namespace ArtefactsManager.View

@@ -9,23 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ArtefactsManager.BusinessLogic.AdminPanel;
 
 namespace ArtefactsManager.View
 {
     public partial class AddEditUser : Form
     {
+        AddEditUserService addEditUserService;
         User user;
-        EditUserService editUserService;
-        AddUserService addUserService;
         bool edit = false;
         public AddEditUser(bool theEdit, int userId)
         {
             InitializeComponent();
+            addEditUserService = new AddEditUserService();
             if (theEdit)
             {
                 edit = true;
-                editUserService = new EditUserService();
-                user = editUserService.getUserById(userId);
+                user = addEditUserService.getUserById(userId);
                 loadUser();
             } else
             {
@@ -33,7 +33,6 @@ namespace ArtefactsManager.View
                 usernameBox.ReadOnly = false;
                 showPassword();
                 cancelBtn.Hide();
-                addUserService = new AddUserService();
                 loadRolesForAdd();
             }
         }
@@ -41,7 +40,7 @@ namespace ArtefactsManager.View
         private void loadUser()
         {
             usernameBox.Text = user.Username;
-            foreach (Role role in editUserService.getRoles())
+            foreach (Role role in addEditUserService.getRoles())
             {
                 roleBox.Items.Add(role.RoleName);
                 if (role.RoleName == user.Role.RoleName)
@@ -53,7 +52,7 @@ namespace ArtefactsManager.View
 
         private void loadRolesForAdd()
         {
-            foreach (Role role in addUserService.getRoles())
+            foreach (Role role in addEditUserService.getRoles())
             {
                 roleBox.Items.Add(role.RoleName);
             }
@@ -92,9 +91,9 @@ namespace ArtefactsManager.View
             
             if (edit)
             {
-                if (editUserService.validate(usernameBox.Text, passwordBox.Text, confirmBox.Text, !changePassBtn.Visible))
+                if (addEditUserService.validate(usernameBox.Text, passwordBox.Text, confirmBox.Text, !changePassBtn.Visible))
                 {
-                    if (!editUserService.updateUser(user, passwordBox.Text, roleBox.Text))
+                    if (!addEditUserService.updateUser(user, passwordBox.Text, roleBox.Text))
                     {
                         MessageBox.Show("Update failed");
                     } else
@@ -108,9 +107,9 @@ namespace ArtefactsManager.View
             }
             else
             {
-                if (addUserService.validate(usernameBox.Text, passwordBox.Text, confirmBox.Text))
+                if (addEditUserService.validate(usernameBox.Text, passwordBox.Text, confirmBox.Text))
                 {
-                    if (!addUserService.saveUser(usernameBox.Text, passwordBox.Text, roleBox.Text))
+                    if (!addEditUserService.saveUser(usernameBox.Text, passwordBox.Text, roleBox.Text))
                     {
                         MessageBox.Show("Saving failed");
                     }

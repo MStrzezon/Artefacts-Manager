@@ -158,13 +158,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\AccountService.cs" />
-    <Compile Include="BusinessLogic\AddEditRoleService.cs" />
-    <Compile Include="BusinessLogic\AddUserService.cs" />
-    <Compile Include="BusinessLogic\ArtefactTypeService.cs" />
-    <Compile Include="BusinessLogic\CanAddService.cs" />
-    <Compile Include="BusinessLogic\CatalogService.cs" />
-    <Compile Include="BusinessLogic\CategoryService.cs" />
+    <Compile Include="BusinessLogic\UserAccount\AccountService.cs" />
+    <Compile Include="BusinessLogic\AdminPanel\AddEditRoleService.cs" />
+    <Compile Include="BusinessLogic\AdminPanel\AddEditUserService.cs" />
+    <Compile Include="BusinessLogic\Catalog\AddArtefactTypeService.cs" />
+    <Compile Include="BusinessLogic\Catalog\Utils\CanAddService.cs" />
+    <Compile Include="BusinessLogic\Catalog\CatalogService.cs" />
+    <Compile Include="BusinessLogic\Catalog\AddCategoryService.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactAttributeDAO.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactDAO.cs" />
     <Compile Include="BusinessLogic\DAO\ArtefactTypeDAO.cs" />
@@ -183,14 +183,13 @@
     <Compile Include="BusinessLogic\DAO\RoleDAO.cs" />
     <Compile Include="BusinessLogic\DAO\RolePermissionDAO.cs" />
     <Compile Include="BusinessLogic\DAO\UserDAO.cs" />
-    <Compile Include="BusinessLogic\EditableService.cs" />
-    <Compile Include="BusinessLogic\EditUserService.cs" />
-    <Compile Include="BusinessLogic\ElementService.cs" />
-    <Compile Include="BusinessLogic\RemovableService.cs" />
-    <Compile Include="BusinessLogic\RolesManagementService.cs" />
-    <Compile Include="BusinessLogic\UserPermissions.cs" />
-    <Compile Include="BusinessLogic\UsersManagementService.cs" />
-    <Compile Include="BusinessLogic\VisibilityService.cs" />
+    <Compile Include="BusinessLogic\Catalog\Utils\EditableService.cs" />
+    <Compile Include="BusinessLogic\Catalog\AddElementService.cs" />
+    <Compile Include="BusinessLogic\Catalog\Utils\RemovableService.cs" />
+    <Compile Include="BusinessLogic\AdminPanel\RoleManagementService.cs" />
+    <Compile Include="BusinessLogic\Login\UserPermissions.cs" />
+    <Compile Include="BusinessLogic\AdminPanel\UserManagementService.cs" />
+    <Compile Include="BusinessLogic\Catalog\Utils\VisibilityService.cs" />
     <Compile Include="Data\ArtefactsManagerDatabaseContext.cs" />
     <Compile Include="Data\Models\Artefact.cs" />
     <Compile Include="Data\Models\ArtefactAttribute.cs" />
@@ -198,7 +197,7 @@
     <Compile Include="Data\Models\Attribute.cs" />
     <Compile Include="Data\Models\AttributeArtefactType.cs" />
     <Compile Include="Data\Models\Category.cs" />
-    <Compile Include="BusinessLogic\EditService.cs" />
+    <Compile Include="BusinessLogic\Catalog\EditArtefactService.cs" />
     <Compile Include="Data\Models\Permission.cs" />
     <Compile Include="Data\Models\RolePermission.cs" />
     <Compile Include="Migrations\20220513085641_newDatabase.cs" />
@@ -264,9 +263,9 @@
       <DependentUpon>20220517163132_add_owner_to_artefact.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
-    <Compile Include="BusinessLogic\Credentials.cs" />
+    <Compile Include="BusinessLogic\Login\Credentials.cs" />
     <Compile Include="Utils\Encryption.cs" />
-    <Compile Include="Utils\LoggedUser.cs" />
+    <Compile Include="BusinessLogic\Login\LoggedUser.cs" />
     <Compile Include="View\Account.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,11 +284,11 @@
     <Compile Include="View\AddEditRole.Designer.cs">
       <DependentUpon>AddEditRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AddType.cs">
+    <Compile Include="View\AddArtefactType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AddType.Designer.cs">
-      <DependentUpon>AddType.cs</DependentUpon>
+    <Compile Include="View\AddArtefactType.Designer.cs">
+      <DependentUpon>AddArtefactType.cs</DependentUpon>
     </Compile>
     <Compile Include="View\AddEditUser.cs">
       <SubType>Form</SubType>
@@ -303,11 +302,11 @@
     <Compile Include="View\Catalog.Designer.cs">
       <DependentUpon>Catalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Edit.cs">
+    <Compile Include="View\EditArtefact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Edit.Designer.cs">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <Compile Include="View\EditArtefact.Designer.cs">
+      <DependentUpon>EditArtefact.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Login.cs">
       <SubType>Form</SubType>
@@ -329,11 +328,11 @@
     <Compile Include="View\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UsersManagement.cs">
+    <Compile Include="View\AdminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UsersManagement.Designer.cs">
-      <DependentUpon>UsersManagement.cs</DependentUpon>
+    <Compile Include="View\AdminPanel.Designer.cs">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
@@ -344,8 +343,8 @@
     <EmbeddedResource Include="View\AddEditRole.resx">
       <DependentUpon>AddEditRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\AddType.resx">
-      <DependentUpon>AddType.cs</DependentUpon>
+    <EmbeddedResource Include="View\AddArtefactType.resx">
+      <DependentUpon>AddArtefactType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
@@ -353,8 +352,8 @@
     <EmbeddedResource Include="View\Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Edit.resx">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <EmbeddedResource Include="View\EditArtefact.resx">
+      <DependentUpon>EditArtefact.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -375,8 +374,8 @@
     <EmbeddedResource Include="View\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UsersManagement.resx">
-      <DependentUpon>UsersManagement.cs</DependentUpon>
+    <EmbeddedResource Include="View\AdminPanel.resx">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -403,6 +402,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BusinessLogic\Home\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

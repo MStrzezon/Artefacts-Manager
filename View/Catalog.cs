@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ArtefactsManager.BusinessLogic;
+using ArtefactsManager.BusinessLogic.Catalog;
 using ArtefactsManager.Data.Models;
 
 namespace ArtefactsManager.View
@@ -137,7 +137,7 @@ namespace ArtefactsManager.View
             {
                 if (e.ColumnIndex == dataGridView.Columns.Count - 2 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count-2].Value == "Edit")
                 {
-                    Edit edit = new Edit(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
+                    EditArtefact edit = new EditArtefact(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
                     edit.ShowDialog();
                     catalogService = new CatalogService();
                 }

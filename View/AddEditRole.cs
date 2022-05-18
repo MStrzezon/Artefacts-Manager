@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArtefactsManager.BusinessLogic;
 using ArtefactsManager.Data.Models;
+using ArtefactsManager.BusinessLogic.AdminPanel;
 
 namespace ArtefactsManager.View
 {

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ArtefactsManager.BusinessLogic.Login;
 
 namespace ArtefactsManager.View
 {
@@ -102,7 +103,7 @@ namespace ArtefactsManager.View
         private void btnManagement_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm(new UsersManagement(), sender);   
+            OpenChildForm(new AdminPanel(), sender);   
         }
     }
 }
