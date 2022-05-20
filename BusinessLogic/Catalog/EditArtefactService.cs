@@ -16,6 +16,7 @@ namespace ArtefactsManager.BusinessLogic.Catalog
         private readonly CategoryDAO categoryDAO;
         private readonly ArtefactDAO artefactDAO;
         private readonly AttributeDAO attributeDAO;
+        private List<Category> categories;
 
         public EditArtefactService(int _artefactId)
         {
@@ -24,6 +25,7 @@ namespace ArtefactsManager.BusinessLogic.Catalog
             attributeDAO = new AttributeDAO();
             artefactId = _artefactId;
             artefact = artefactDAO.GetByIdWithAll(artefactId);
+            categories = categoryDAO.GetAll().ToList();
         }
 
         public string getAttributeName()
@@ -33,12 +35,12 @@ namespace ArtefactsManager.BusinessLogic.Catalog
 
         public IEnumerable<Category> getCategories()
         {
-            return categoryDAO.GetAll();
+            return categories;
         }
 
         public int getCurrentCategoryIndex()
         {
-            return getCategories().ToList().FindIndex(a => a.CategoryId == artefact.Category.CategoryId);
+            return categories.FindIndex(a => a.CategoryId == artefact.Category.CategoryId);
         }
 
         public IEnumerable<string> getAttributesValues()
@@ -80,10 +82,21 @@ namespace ArtefactsManager.BusinessLogic.Catalog
                 int idx = 0;
                 foreach (string attributeValue in attributes)
                 {
+                    if (attributeDAO.GetByArtefactType(artefact.ArtefactType.ArtefactTypeId).ElementAt(idx).Name == "poziom mocy")
+                    {
+                        if(!int.TryParse(attributeValue, out int value))
+                        {
+                            Console.WriteLine(attributeValue);
+                            return false;
+                        }
+                    }
                     artefact.ArtefactAttributes.ElementAt(idx++).Value = attributeValue;
                 }
-                artefact.Category = getCategories().ElementAt(categoryId);
                 artefactDAO.Update(artefact);
+                if (artefact.Category.CategoryId != categories.ElementAt(categoryId).CategoryId)
+                {
+                    artefact.Category = categories.ElementAt(categoryId);
+                }
                 artefactDAO.Save();
                 return true;
             } catch (Exception ex)

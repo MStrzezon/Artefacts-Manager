@@ -100,11 +100,11 @@ namespace ArtefactsManager.View
                 try
                 {
                     loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
-                    createButtonColumns();
                 } catch (ArgumentOutOfRangeException ex)
                 {
                     loadTableByType(((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
                 }
+                createButtonColumns();
             }
         }
 
@@ -136,9 +136,11 @@ namespace ArtefactsManager.View
             {
                 if (e.ColumnIndex == dataGridView.Columns.Count - 2 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count-2].Value == "Edit")
                 {
+                    catalogService = null;
                     EditArtefact edit = new EditArtefact(Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells[0].Value));
                     edit.ShowDialog();
                     catalogService = new CatalogService();
+                    refreshTable();
                 }
                 else if (e.ColumnIndex == dataGridView.Columns.Count - 1 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count - 1].Value == "Delete")
                 {
