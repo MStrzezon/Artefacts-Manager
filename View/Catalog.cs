@@ -132,7 +132,6 @@ namespace ArtefactsManager.View
 
         private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine(e.ColumnIndex);
             if (e.RowIndex >= 0)
             {
                 if (e.ColumnIndex == dataGridView.Columns.Count - 2 && (string)dataGridView.Rows[e.RowIndex].Cells[dataGridView.Columns.Count-2].Value == "Edit")

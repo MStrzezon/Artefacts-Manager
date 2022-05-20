@@ -158,6 +158,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Home\HomeService.cs" />
     <Compile Include="BusinessLogic\UserAccount\AccountService.cs" />
     <Compile Include="BusinessLogic\AdminPanel\AddEditRoleService.cs" />
     <Compile Include="BusinessLogic\AdminPanel\AddEditUserService.cs" />
@@ -403,9 +404,7 @@
   <ItemGroup>
     <None Include="Resources\search.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusinessLogic\Home\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -31,7 +31,6 @@ namespace ArtefactsManager.BusinessLogic.Login
                 LoggedUser.UserId = user.UserId;
                 LoggedUser.IsAdmin = user.IsAdmin;
                 UserPermissions.Permissions = permissionDao.GetByRole(user.Role.RoleId).ToList();
-                Console.WriteLine(user.IsAdmin);
                 return true;
             } else
             {

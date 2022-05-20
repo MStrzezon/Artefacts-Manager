@@ -24,6 +24,8 @@ namespace ArtefactsManager.BusinessLogic.DAO
 
         IEnumerable<Artefact> GetByType(int typeId);
 
-        IEnumerable<Artefact> GetByTypeAndName(int typeId, string name);    
+        IEnumerable<Artefact> GetByTypeAndName(int typeId, string name);
+
+        IEnumerable<Artefact> Get5LastAdded();
     }
 }

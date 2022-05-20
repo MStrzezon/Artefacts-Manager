@@ -35,6 +35,8 @@
             this.dataGridViewLast = new System.Windows.Forms.DataGridView();
             this.panelLastAddedTitle = new System.Windows.Forms.Panel();
             this.lblLastAdded = new System.Windows.Forms.Label();
+            this.artefactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -66,8 +68,10 @@
             // 
             // dataGridViewTop
             // 
+            this.dataGridViewTop.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewTop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewTop.GridColor = System.Drawing.Color.White;
             this.dataGridViewTop.Location = new System.Drawing.Point(0, 50);
             this.dataGridViewTop.Name = "dataGridViewTop";
             this.dataGridViewTop.RowHeadersWidth = 51;
@@ -98,8 +102,17 @@
             // 
             // dataGridViewLast
             // 
+            this.dataGridViewLast.AllowUserToAddRows = false;
+            this.dataGridViewLast.AllowUserToDeleteRows = false;
+            this.dataGridViewLast.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewLast.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewLast.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewLast.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLast.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.artefactName,
+            this.createdDate});
             this.dataGridViewLast.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewLast.GridColor = System.Drawing.Color.White;
             this.dataGridViewLast.Location = new System.Drawing.Point(0, 50);
             this.dataGridViewLast.Name = "dataGridViewLast";
             this.dataGridViewLast.RowHeadersWidth = 51;
@@ -127,6 +140,20 @@
             this.lblLastAdded.Size = new System.Drawing.Size(178, 21);
             this.lblLastAdded.TabIndex = 3;
             this.lblLastAdded.Text = "Last added Artefacts";
+            // 
+            // artefactName
+            // 
+            this.artefactName.HeaderText = "Name";
+            this.artefactName.MinimumWidth = 6;
+            this.artefactName.Name = "artefactName";
+            this.artefactName.ReadOnly = true;
+            // 
+            // createdDate
+            // 
+            this.createdDate.HeaderText = "Date added";
+            this.createdDate.MinimumWidth = 6;
+            this.createdDate.Name = "createdDate";
+            this.createdDate.ReadOnly = true;
             // 
             // Home
             // 
@@ -159,5 +186,7 @@
         private System.Windows.Forms.DataGridView dataGridViewLast;
         private System.Windows.Forms.Panel panelLastAddedTitle;
         private System.Windows.Forms.Label lblLastAdded;
+        private System.Windows.Forms.DataGridViewTextBoxColumn artefactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdDate;
     }
 }

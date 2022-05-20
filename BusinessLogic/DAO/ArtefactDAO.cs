@@ -83,5 +83,10 @@ namespace ArtefactsManager.BusinessLogic.DAO
     .Include("ArtefactAttributes").ToList();
         }
 
+        public IEnumerable<Artefact> Get5LastAdded()
+        {
+            return _context.Artefacts.OrderByDescending(a => a.Created).Take(5);
+        }
+
     }
 }
