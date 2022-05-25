@@ -23,7 +23,10 @@ namespace ArtefactsManager.View
             catalogService = new CatalogService();
             loadCategories();
             categoriesBox.SelectedIndex = categoriesBox.Items.Count - 1;
-            typeBox.SelectedIndex = 0;
+            if (typeBox.Items.Count > 0)
+            {
+                typeBox.SelectedIndex = 0;
+            }
         }
 
         private void loadCategories()
@@ -67,7 +70,7 @@ namespace ArtefactsManager.View
 
         private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(searchBox.Text))
+            if (string.IsNullOrEmpty(searchBox.Text) && typeBox.Items.Count > 0)
             {
                 if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
                 {
@@ -78,7 +81,7 @@ namespace ArtefactsManager.View
                     loadTableByCategoryAndName(((List<Category>)categoriesBox.Tag).ElementAt(categoriesBox.SelectedIndex).CategoryId, ((List<ArtefactType>)typeBox.Tag).ElementAt(typeBox.SelectedIndex).ArtefactTypeId);
                 }
             }
-            else
+            else if (typeBox.Items.Count > 0)
             {
                 if (categoriesBox.SelectedIndex == categoriesBox.Items.Count - 1)
                 {

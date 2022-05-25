@@ -201,67 +201,15 @@
     <Compile Include="BusinessLogic\Catalog\EditArtefactService.cs" />
     <Compile Include="Data\Models\Permission.cs" />
     <Compile Include="Data\Models\RolePermission.cs" />
-    <Compile Include="Migrations\20220513085641_newDatabase.cs" />
-    <Compile Include="Migrations\20220513085641_newDatabase.designer.cs">
-      <DependentUpon>20220513085641_newDatabase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Data\Models\Role.cs" />
     <Compile Include="Data\Models\User.cs" />
     <Compile Include="Migrations\20220510103107_CREATEDB.cs" />
     <Compile Include="Migrations\20220510103107_CREATEDB.designer.cs">
       <DependentUpon>20220510103107_CREATEDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220510103316_ChangeTableName.cs" />
-    <Compile Include="Migrations\20220510103316_ChangeTableName.designer.cs">
-      <DependentUpon>20220510103316_ChangeTableName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220511193045_addCharacters.cs" />
-    <Compile Include="Migrations\20220511193045_addCharacters.designer.cs">
-      <DependentUpon>20220511193045_addCharacters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220513090805_DATABASEv2.cs" />
-    <Compile Include="Migrations\20220513090805_DATABASEv2.designer.cs">
-      <DependentUpon>20220513090805_DATABASEv2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220513101117_NORMALIZEMODELS.cs" />
-    <Compile Include="Migrations\20220513101117_NORMALIZEMODELS.designer.cs">
-      <DependentUpon>20220513101117_NORMALIZEMODELS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs" />
-    <Compile Include="Migrations\20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.designer.cs">
-      <DependentUpon>20220513122054_CHANGE_ARTEFACTTYPES_COLUMN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220514082207_add_column_to_artefact.cs" />
-    <Compile Include="Migrations\20220514082207_add_column_to_artefact.designer.cs">
-      <DependentUpon>20220514082207_add_column_to_artefact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220514085233_add_columnt_to_artefactattribute.cs" />
-    <Compile Include="Migrations\20220514085233_add_columnt_to_artefactattribute.designer.cs">
-      <DependentUpon>20220514085233_add_columnt_to_artefactattribute.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220514091519_delete_artefact_category.cs" />
-    <Compile Include="Migrations\20220514091519_delete_artefact_category.designer.cs">
-      <DependentUpon>20220514091519_delete_artefact_category.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220516093704_change_user_role.cs" />
-    <Compile Include="Migrations\20220516093704_change_user_role.designer.cs">
-      <DependentUpon>20220516093704_change_user_role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220517081931_add_permission_table.cs" />
-    <Compile Include="Migrations\20220517081931_add_permission_table.designer.cs">
-      <DependentUpon>20220517081931_add_permission_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220517082250_edit_permission_table.cs" />
-    <Compile Include="Migrations\20220517082250_edit_permission_table.designer.cs">
-      <DependentUpon>20220517082250_edit_permission_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220517162626_add_owner_to_attribute.cs" />
-    <Compile Include="Migrations\20220517162626_add_owner_to_attribute.designer.cs">
-      <DependentUpon>20220517162626_add_owner_to_attribute.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220517163132_add_owner_to_artefact.cs" />
-    <Compile Include="Migrations\20220517163132_add_owner_to_artefact.designer.cs">
-      <DependentUpon>20220517163132_add_owner_to_artefact.cs</DependentUpon>
+    <Compile Include="Migrations\20220525111633_createDBv2.cs" />
+    <Compile Include="Migrations\20220525111633_createDBv2.designer.cs">
+      <DependentUpon>20220525111633_createDBv2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
     <Compile Include="BusinessLogic\Login\Credentials.cs" />

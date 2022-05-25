@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtefactsManager.Migrations
 {
     [DbContext(typeof(ArtefactsManagerDatabaseContext))]
-    [Migration("20220516093704_change_user_role")]
-    partial class change_user_role
+    [Migration("20220525111633_createDBv2")]
+    partial class createDBv2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,11 +37,16 @@ namespace ArtefactsManager.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int?>("OwnerUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ArtefactId");
 
                     b.HasIndex("ArtefactTypeId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OwnerUserId");
 
                     b.ToTable("Artefacts");
                 });
@@ -121,6 +126,32 @@ namespace ArtefactsManager.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ArtefactsManager.Data.Models.Permission", b =>
+                {
+                    b.Property<int>("PermissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CanAdd")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Editable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Visible")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("PermissionId");
+
+                    b.ToTable("Permissions");
+                });
+
             modelBuilder.Entity("ArtefactsManager.Data.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -133,6 +164,21 @@ namespace ArtefactsManager.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("ArtefactsManager.Data.Models.RolePermission", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolesPermissions");
                 });
 
             modelBuilder.Entity("ArtefactsManager.Data.Models.User", b =>
@@ -169,6 +215,10 @@ namespace ArtefactsManager.Migrations
                     b.HasOne("ArtefactsManager.Data.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
+
+                    b.HasOne("ArtefactsManager.Data.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerUserId");
                 });
 
             modelBuilder.Entity("ArtefactsManager.Data.Models.ArtefactAttribute", b =>
@@ -197,6 +247,21 @@ namespace ArtefactsManager.Migrations
                     b.HasOne("ArtefactsManager.Data.Models.Attribute", "Attribute")
                         .WithMany("AttributeArtefactTypes")
                         .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ArtefactsManager.Data.Models.RolePermission", b =>
+                {
+                    b.HasOne("ArtefactsManager.Data.Models.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ArtefactsManager.Data.Models.Role", "Role")
+                        .WithMany("rolePermissions")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

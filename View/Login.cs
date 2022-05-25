@@ -26,16 +26,24 @@ namespace ArtefactsManager.View
         {
             if (username.Text != "" && password.Text != "")
             {
-                if (credentials.validate(username.Text, password.Text))
+                try
                 {
-                    artefactsManager = new ArtefactsManager();
-                    this.Hide();
-                    artefactsManager.ShowDialog();
-                }
-                else
+                    if (credentials.validate(username.Text, password.Text))
+                    {
+                        artefactsManager = new ArtefactsManager();
+                        this.Hide();
+                        artefactsManager.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wprowadzono nie poprawne dane!");
+                    }
+                } catch (Exception ex)
                 {
-                    MessageBox.Show("Wprowadzono nie poprawne dane!");
+                    MessageBox.Show("Database connection failure", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    Application.Exit();
                 }
+
             } else
             {
                 MessageBox.Show("Wprowadź dane!");
