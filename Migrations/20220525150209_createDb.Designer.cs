@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtefactsManager.Migrations
 {
     [DbContext(typeof(ArtefactsManagerDatabaseContext))]
-    [Migration("20220525111633_createDBv2")]
-    partial class createDBv2
+    [Migration("20220525150209_createDb")]
+    partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,9 +186,6 @@ namespace ArtefactsManager.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
