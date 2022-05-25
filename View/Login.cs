@@ -38,7 +38,7 @@ namespace ArtefactsManager.View
                     {
                         MessageBox.Show("Wprowadzono nie poprawne dane!");
                     }
-                } catch (Exception ex)
+                } catch (InvalidOperationException ex)
                 {
                     MessageBox.Show("Database connection failure", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     Application.Exit();
