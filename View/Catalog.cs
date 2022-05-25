@@ -200,7 +200,7 @@ namespace ArtefactsManager.View
         {
             if (categoriesBox.SelectedIndex == -1)
             {
-                return null;
+                return "All categories";
             }
             else
             {
