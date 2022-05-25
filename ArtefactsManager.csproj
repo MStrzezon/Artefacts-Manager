@@ -203,16 +203,12 @@
     <Compile Include="Data\Models\RolePermission.cs" />
     <Compile Include="Data\Models\Role.cs" />
     <Compile Include="Data\Models\User.cs" />
-    <Compile Include="Migrations\20220510103107_CREATEDB.cs" />
-    <Compile Include="Migrations\20220510103107_CREATEDB.designer.cs">
-      <DependentUpon>20220510103107_CREATEDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220525111633_createDBv2.cs" />
-    <Compile Include="Migrations\20220525111633_createDBv2.designer.cs">
-      <DependentUpon>20220525111633_createDBv2.cs</DependentUpon>
+    <Compile Include="BusinessLogic\Login\Credentials.cs" />
+    <Compile Include="Migrations\20220525150209_createDb.cs" />
+    <Compile Include="Migrations\20220525150209_createDb.designer.cs">
+      <DependentUpon>20220525150209_createDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ArtefactsManagerDatabaseContextModelSnapshot.cs" />
-    <Compile Include="BusinessLogic\Login\Credentials.cs" />
     <Compile Include="Utils\Encryption.cs" />
     <Compile Include="BusinessLogic\Login\LoggedUser.cs" />
     <Compile Include="View\Account.cs">
