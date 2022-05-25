@@ -112,7 +112,6 @@ namespace ArtefactsManager.BusinessLogic.AdminPanel
             User user = new User();
             user.Username = username;
             user.Password = Encryption.ComputeMd5Hash(password);
-            user.IsAdmin = false;
             return user;
         }
     }

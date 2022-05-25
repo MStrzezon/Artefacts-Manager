@@ -26,7 +26,7 @@ namespace ArtefactsManager.View
 
         private void loadProperMenu()
         {
-            if (LoggedUser.IsAdmin)
+            if (LoggedUser.userRoleName == "admin")
             {
                 btnManagement.Visible = true;
             }

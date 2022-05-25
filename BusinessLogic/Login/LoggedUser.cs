@@ -11,6 +11,6 @@ namespace ArtefactsManager.BusinessLogic.Login
         public static int UserId { get; set; } 
         public static string Username { get; set; }
 
-        public static bool IsAdmin { get; set; }
+        public static string userRoleName { get; set; }
     }
 }

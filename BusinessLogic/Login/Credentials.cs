@@ -29,7 +29,7 @@ namespace ArtefactsManager.BusinessLogic.Login
             {
                 LoggedUser.Username = username;
                 LoggedUser.UserId = user.UserId;
-                LoggedUser.IsAdmin = user.IsAdmin;
+                LoggedUser.userRoleName = user.Role.RoleName;
                 UserPermissions.Permissions = permissionDao.GetByRole(user.Role.RoleId).ToList();
                 return true;
             } else

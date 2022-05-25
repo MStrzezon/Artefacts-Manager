@@ -20,6 +20,7 @@ namespace ArtefactsManager.View
         {
             InitializeComponent();
             usernameBox.Text = LoggedUser.Username;
+            roleBox.Text = LoggedUser.userRoleName;
         }
 
         private void btnPassword_Click(object sender, EventArgs e)
